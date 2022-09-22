@@ -17,6 +17,9 @@ const RegisterComponent = () => {
   const OnSubmit = () => {
     console.log('Hi');
   };
+  const firstNameChange = (val) =>{
+    
+  }
   return (
     <>
       <Container>
@@ -29,7 +32,7 @@ const RegisterComponent = () => {
         <Text style={text.primaryText}>Welcome To Heartly</Text>
         <Input
           label="FirstName"
-          onChangeText={text => setFirstName(text)}
+          onChangeText={text => firstNameChange(text)}
           value={FirstName}
         />
         <Input
