@@ -17,5 +17,8 @@ export default StyleSheet.create({
     
         marginTop: 2,
       },
+      error:{
+        color: 'red'
+      }
      
 })

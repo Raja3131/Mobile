@@ -7,7 +7,7 @@ import styles from './styles';
 import {text} from '../../styles/Global';
 import { ROUTE_NAMES } from './../../constants/routeNames';
 import { useNavigation } from '@react-navigation/native';
-const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLoggedIn,data,onClear}) => {
+const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLoggedIn,data,onClear,errors}) => {
     const {navigate} = useNavigation()
     const input = useRef(null)
    
@@ -24,9 +24,19 @@ const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLog
         <Text style={text.primaryText}>Welcome To Heartly</Text>
         <Text style={text.primaryText}>Login to ur Account</Text>
 
-        <Input label="Email" onChangeText={(value)=>onChange({name:'email',value})} value={form.email } placeholder="Enter Email" ref={input}/>
-        <Input label="Mobile" onChangeText={(value)=>onChange({name:'mobile',value})} value={form.mobile} placeholder="Enter Mobile Number"/>
-        <Input label="Password" onChangeText={(value)=>onChange({name:'password',value})} value={form.password} placeholder="Enter Password"/>
+        <Input label="Email" onChangeText={(value)=>onChange({name:'email',value})} value={form.email } placeholder="Enter Email"
+          error={errors.email}
+
+         />
+        <Input label="Mobile" onChangeText={(value)=>onChange({name:'mobile',value})} value={form.mobile} placeholder="Enter Mobile Number" 
+          error={errors.mobile}
+          maxLength={10}
+          keyboardType="numeric"
+
+        />
+        <Input label="Password" onChangeText={(value)=>onChange({name:'password',value})} value={form.password} placeholder="Enter Password"
+        error={errors.password}
+         />
         <CustomButton title="Login" loading={loading} disabled={!(form.email&&form.mobile&&form.password)} primary onPress={onSubmit}/>
         <CustomButton title="Clear" loading={loading} disabled={false} primary onPress={onClear}/>
 

@@ -7,8 +7,9 @@ import Container from './../common/container/Container';
 import {text} from '../../styles/Global';
 import styles from './styles';
 import { ROUTE_NAMES } from '../../constants/routeNames';
-const RegisterComponent = ({onChange,form,onSubmit}) => {
+const RegisterComponent = ({onChange,form,onSubmit,errors,onClear}) => {
   const {navigate} = useNavigation()
+
   
   return (
     <>
@@ -24,36 +25,49 @@ const RegisterComponent = ({onChange,form,onSubmit}) => {
           label="FirstName"
           onChangeText={(value)=>onChange({name:'firstName',value})}
           value={form.firstName}
+          error={errors.firstName}
         />
         <Input
           label="LastName"
           onChangeText={(value)=>onChange({name:'lastName',value})}
           value={form.lastName}
+          error={errors.lastName}
+
         />
         <Input
           label="Email"
           onChangeText={(value)=>onChange({name:'email',value})}
           value={form.email}
+          error={errors.email}
+
         />
         <Input
           label="Mobile"
           onChangeText={(value)=>onChange({name:'mobile',value})}
           value={form.mobile}
+          error={errors.mobile}
+
         />
         <Input
           label="City"
           onChangeText={(value)=>onChange({name:'city',value})}
           value={form.city}
+          error={errors.city}
+
         />
         <Input
           label="Password"
           onChangeText={(value)=>onChange({name:'password',value})}
           value={form.password}
+          error={errors.password}
+
         />
         <Input
           label="Confirm Password"
           onChangeText={(value)=>onChange({name:'confirmPassword',value})}
           value={form.confirmPassword}
+          error={errors.confirmPassword}
+
         />
         <CustomButton
           loading={false}
@@ -64,9 +78,9 @@ const RegisterComponent = ({onChange,form,onSubmit}) => {
         />
          <CustomButton
           loading={false}
-          disabled={!(form.confirmPassword)}
           title="Clear"
           primary
+          onPress={onClear}
         />
           <View style={styles.createSection}>
             <Text style={styles.infoText}>Already have an account?</Text>

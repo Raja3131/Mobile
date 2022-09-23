@@ -5,17 +5,48 @@ import axios from 'axios'
 import { set } from 'mongoose'
 
 const Register = () => {
-  const myForm = useRef(null)
+  const [errors, setErrors] = useState({});
 
   const [form,setForm] = useState({})
+  const onClear = () =>{
+    setForm({
+      ['firstName']:'',
+      ['lastName']:'',
+      ['email']:'',
+      ['mobile']:'',
+      ['city']:'',
+      ['password']:'',
+      ['confirmPassword']:'',
+    })
+  }
+
+  
   const onChange = ({name,value}) =>{
     setForm({...form,[name]:value})
+    if (value !== '') {
+      if (name === 'password' || name === 'confirmPassword') {
+        if (value.length < 8) {
+          setErrors((prev) => {
+            return {...prev, [name]: 'This field needs min 8 characters'};
+          });
+        } else {
+          setErrors((prev) => {
+            return {...prev, [name]: null};
+          });
+        }
+      } else {
+        setErrors((prev) => {
+          return {...prev, [name]: null};
+        });
+      }
+    } else {
+      setErrors((prev) => {
+        return {...prev, [name]: 'This field is required'};
+      });
+    }
 
   }
-  const onClear = () =>{
-      setForm({...form,})
-      console.log(form)
-  }
+ 
   const onSubmit = async() =>{
    try {
     axios.post('http://10.0.2.2:5000/register', {
@@ -54,6 +85,8 @@ const Register = () => {
     onChange={onChange}
     onSubmit={onSubmit}
     onClear={onClear}
+    errors={errors}
+    
     />
     </>
   )
