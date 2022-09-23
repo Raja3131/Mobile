@@ -10,6 +10,9 @@ const Input = ({label,onChangeText,value,error,...props}) => {
       if(focused){
         return appColors.Blue
       }
+      else {
+        return appColors.grey
+      }
     }
     return (
         <>

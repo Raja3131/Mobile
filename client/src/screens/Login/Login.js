@@ -1,15 +1,23 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import LoginComponent from '../../components/LoginComponent/LoginComponent'
 
 const Login = () => {
+  const [form, setForm] = useState({});
+  const [justSignedUp, setJustSignedUp] = useState(false);
     const onSubmit = () =>{
-        console.log('Login')
+        setJustSignedUp(true)
     }
+    const onChange = ({name, value}) => {
+      setForm({...form, [name]: value});
+    };
   return (
     <>
     <LoginComponent
     onSubmit={onSubmit}
+    onChange={onChange}
+    form={form}
+    justSignedUp={justSignedUp}
 
     />
     </>

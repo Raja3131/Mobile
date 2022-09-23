@@ -7,12 +7,7 @@ import Container from './../common/container/Container';
 import {text} from '../../styles/Global';
 import styles from './styles';
 import { ROUTE_NAMES } from '../../constants/routeNames';
-const RegisterComponent = () => {
-  const [FirstName, setFirstName] = useState('');
-  const [LastName, setLastName] = useState('');
-  const [Email, setEmail] = useState('');
-  const [Mobile, setMobile] = useState('');
-  const [City, setCity] = useState('');
+const RegisterComponent = ({onChange,form}) => {
   const {navigate} = useNavigation()
   const OnSubmit = () => {
     console.log('Hi');
@@ -32,28 +27,28 @@ const RegisterComponent = () => {
         <Text style={text.primaryText}>Welcome To Heartly</Text>
         <Input
           label="FirstName"
-          onChangeText={text => firstNameChange(text)}
-          value={FirstName}
+          onChangeText={(value)=>onChange({name:'firstName',value})}
+          value={form.firstName}
         />
         <Input
           label="LastName"
-          onChangeText={text => setLastName(text)}
-          value={LastName}
+          onChangeText={(value)=>onChange({name:'lastName',value})}
+          value={form.lastName}
         />
         <Input
           label="Email"
-          onChangeText={text => setEmail(text)}
-          value={LastName}
+          onChangeText={(value)=>onChange({name:'email',value})}
+          value={form.email}
         />
         <Input
           label="Mobile"
-          onChangeText={text => setMobile(text)}
-          value={LastName}
+          onChangeText={(value)=>onChange({name:'mobile',value})}
+          value={form.mobile}
         />
         <Input
           label="City"
-          onChangeText={text => setCity(text)}
-          value={LastName}
+          onChangeText={(value)=>onChange({name:'city',value})}
+          value={form.city}
         />
         <CustomButton
           loading={false}

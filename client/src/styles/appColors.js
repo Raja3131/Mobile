@@ -3,6 +3,7 @@ const appColors = {
   Blue: "#0190db",
   dimBlack: "#42454a",
   lossRed: "#ac1113",
+  grey: '#adb5bd',
 
 }
 
