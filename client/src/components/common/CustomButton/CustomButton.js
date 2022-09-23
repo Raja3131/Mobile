@@ -22,7 +22,7 @@ const CustomButton = ({loading,title,disabled,primary,onPress,style,...props}) =
       <View style={[styles.loaderSection]}>
         {loading && (
           <ActivityIndicator
-            color={primary ? colors.secondary : appColors.primary}
+            color={primary ? appColors.secondary : appColors.primary}
           />
         )}
         {title && (

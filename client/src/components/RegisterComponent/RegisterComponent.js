@@ -7,14 +7,9 @@ import Container from './../common/container/Container';
 import {text} from '../../styles/Global';
 import styles from './styles';
 import { ROUTE_NAMES } from '../../constants/routeNames';
-const RegisterComponent = ({onChange,form}) => {
+const RegisterComponent = ({onChange,form,onSubmit}) => {
   const {navigate} = useNavigation()
-  const OnSubmit = () => {
-    console.log('Hi');
-  };
-  const firstNameChange = (val) =>{
-    
-  }
+  
   return (
     <>
       <Container>
@@ -50,11 +45,27 @@ const RegisterComponent = ({onChange,form}) => {
           onChangeText={(value)=>onChange({name:'city',value})}
           value={form.city}
         />
+        <Input
+          label="Password"
+          onChangeText={(value)=>onChange({name:'password',value})}
+          value={form.password}
+        />
+        <Input
+          label="Confirm Password"
+          onChangeText={(value)=>onChange({name:'confirmPassword',value})}
+          value={form.confirmPassword}
+        />
         <CustomButton
           loading={false}
-          disabled={false}
+          disabled={!(form.confirmPassword)}
           title="SignUp"
-          onPress={OnSubmit}
+          onPress={onSubmit}
+          primary
+        />
+         <CustomButton
+          loading={false}
+          disabled={!(form.confirmPassword)}
+          title="Clear"
           primary
         />
           <View style={styles.createSection}>

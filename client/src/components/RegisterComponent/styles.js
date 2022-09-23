@@ -11,10 +11,9 @@ export default StyleSheet.create({
         fontSize: 17,
       },
       logoImage:{
-        height: 150,
+        height: 100,
     width: 150,
     alignSelf: 'center',
-    marginTop: 50,
       },
       createSection:{
         alignItems:'center'

@@ -10,12 +10,12 @@ export default StyleSheet.create({
         width: '100%',
       },
       wrapper: {
-        height: 42,
+        height: 40,
         borderWidth: 1,
         borderRadius: 4,
         paddingHorizontal: 5,
     
-        marginTop: 5,
+        marginTop: 2,
       },
      
 })
