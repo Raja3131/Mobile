@@ -2,7 +2,7 @@ import { ErrorResponse } from '../utils/errorResponse.js';
 import User from './../models/userModel.js';
 
 export const Register = async (req,res,next) => {
-  const {email} = req.body
+  const {email,password} = req.body
   try {
    
     const newUser = await User.isThisEmailInUse(email);
@@ -13,6 +13,7 @@ export const Register = async (req,res,next) => {
     });
     const user = await User({
       email,
+      password
     });
     await user.save();
     res.status(201).json({
@@ -40,6 +41,14 @@ export const Login = async(req, res) => {
       success: false,
       message: "User not found, try sign-up",
     });
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+      return res.json({
+        status:400,
+        success: false,
+        message: "Password doesn't match",
+      });
+    }
     if(user){
         res.status(200).json({
             status: 200,

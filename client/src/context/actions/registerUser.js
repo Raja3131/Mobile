@@ -35,7 +35,7 @@ export default ({
           type: ACTION_TYPES.REGISTER_FAIL,
           payload: res.data.message
             ? res.data.message
-            : {error: res.data.message},
+            : res.data.message,
         });
         console.log(res.data.message)
       }
@@ -45,7 +45,7 @@ export default ({
         type: ACTION_TYPES.REGISTER_FAIL,
         payload: error.response
           ? error.response.data
-          : {error: 'Something went wrong, try agin'},
+          : error='Something went wrong, try agin',
       });
     }
   };

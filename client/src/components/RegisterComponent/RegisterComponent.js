@@ -28,7 +28,14 @@ const RegisterComponent = ({onChange, form, onSubmit, errors, onClear,error}) =>
           style={styles.logoImage}
         />
         <Text style={text.primaryText}>Welcome To Heartly</Text>
-        <Text>{error}</Text>
+        {error && !error.error && (
+            <Text
+             
+              
+            >Invalid</Text>
+          )}
+
+          {error?.error && <Text >Invalid</Text>}
         <Input
           label="FirstName"
           onChangeText={value => onChange({name: 'firstName', value})}

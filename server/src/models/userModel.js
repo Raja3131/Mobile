@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from 'bcrypt'
 
 const userSchema = new mongoose.Schema({
   firstName: {
@@ -9,6 +10,12 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
+    required: [true, "Please provide email address"],
+    unique: true,
+    match: [
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "Please provide a valid email",
+    ],
   },
   mobile: {
     type: String,
@@ -23,6 +30,30 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
 });
+userSchema.pre("save", async function (next) {
+try {
+  const salt =await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(this.password,salt)
+  this.password =hashedPassword
+  next()
+  console.log(this.password)
+} catch (error) {
+  console.log(error)
+}
+ 
+});
+userSchema.methods.comparePassword = async function (password) {
+  if (!password) throw new Error('Password is mission, can not compare!');
+
+  try {
+    const result = await bcrypt.compare(password, this.password);
+    return result;
+  } catch (error) {
+    console.log('Error while comparing password!', error.message);
+  }
+};
+
+
 userSchema.statics.isThisEmailInUse = async function (email) {
   if (!email) throw new Error('Invalid Email');
   try {

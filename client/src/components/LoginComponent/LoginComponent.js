@@ -24,8 +24,10 @@ const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLog
         <Text style={text.primaryText}>Welcome To Heartly</Text>
         <Text style={text.primaryText}>Login to ur Account</Text>
 
-        <Input label="Email" onChangeText={(value)=>onChange({name:'email',value})} value={form.email } placeholder="Enter Email"
+        <Input label="Email" onChangeText={(value)=>onChange({name:'email',value})} value={form.email } placeholder="user@example.com"
           error={errors.email}
+          keyboardType="email-address"
+          mode="outlined"
 
          />
         <Input label="Mobile" onChangeText={(value)=>onChange({name:'mobile',value})} value={form.mobile} placeholder="Enter Mobile Number" 
@@ -37,8 +39,8 @@ const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLog
         <Input label="Password" onChangeText={(value)=>onChange({name:'password',value})} value={form.password} placeholder="Enter Password"
         error={errors.password}
          />
-        <CustomButton title="Login" loading={loading} disabled={!(form.email&&form.mobile&&form.password)} primary onPress={onSubmit}/>
-        <CustomButton title="Clear" loading={loading} disabled={false} primary onPress={onClear}/>
+        <CustomButton title="Login" loading={loading} disabled={errors.email||errors.password?true:false} primary onPress={onSubmit}/>
+        <CustomButton title="Clear" loading={loading} disabled={!(form.email||form.mobile||form.password)} primary onPress={onClear}/>
 
         {error && !error.error && (
             <Text
@@ -47,7 +49,7 @@ const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLog
             >{error}</Text>
           )}
 
-          {error?.error && <Text >Nothing</Text>}
+          {error?.error && <Text >This email is already in use, try sign-in</Text>}
         <View style={styles.createSection}>
             <Text style={styles.infoText}>Don't have an account?</Text>
             <Pressable
