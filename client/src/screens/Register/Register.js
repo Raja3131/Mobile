@@ -1,13 +1,30 @@
 import { View, Text, Alert } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState,useContext } from 'react'
 import RegisterComponent from '../../components/RegisterComponent/RegisterComponent'
 import axios from 'axios'
-import { set } from 'mongoose'
+import {useNavigation} from '@react-navigation/native'
+import { useFocusEffect } from '@react-navigation/native'
+import { GlobalContext } from '../../context/Provider'
+import registerUser,{clearAuthState} from '../../context/actions/registerUser'
+import { ROUTE_NAMES } from '../../constants/routeNames'
 
 const Register = () => {
   const [errors, setErrors] = useState({});
-
   const [form,setForm] = useState({})
+  const {
+    authDispatch,
+    authState: {error, loading, data},
+  } = useContext(GlobalContext);
+  const {navigate} = useNavigation()
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        if (data || error) {
+          clearAuthState()(authDispatch);
+        }
+      };
+    }, [data, error]),
+  );
   const onClear = () =>{
     setForm({
       ['firstName']:'',
@@ -49,29 +66,12 @@ const Register = () => {
  
   const onSubmit = async() =>{
    try {
-    axios.post('http://10.0.2.2:5000/register', {
-      firstName:form.firstName,
-      lastName:form.lastName,
-      email:form.email,
-      mobile:form.mobile,
-      city:form.city,
-      password:form.password,
-      confirmPassword:form.confirmPassword,
-    })
-    .then((res)=>{
-      if (res.status===201){ 
-        Alert.alert('User Registered Successfully')
-  
-      }
-      if(res.status==400){
-        Alert.alert('User Registration failed')
-      }
-      else{
-        Alert.alert('User Registration failed')
-
-      }
-    });
+   registerUser(form)(authDispatch)
+  if(!error){
+    navigate(ROUTE_NAMES.LOGIN)
+  }
    
+
     
    } catch (error) {
       Alert.alert('Error')
@@ -86,6 +86,7 @@ const Register = () => {
     onSubmit={onSubmit}
     onClear={onClear}
     errors={errors}
+    error={error}
     
     />
     </>

@@ -15,7 +15,7 @@ import Container from './../common/container/Container';
 import {text} from '../../styles/Global';
 import styles from './styles';
 import {ROUTE_NAMES} from '../../constants/routeNames';
-const RegisterComponent = ({onChange, form, onSubmit, errors, onClear}) => {
+const RegisterComponent = ({onChange, form, onSubmit, errors, onClear,error}) => {
   const {navigate} = useNavigation();
 
   return (
@@ -28,6 +28,7 @@ const RegisterComponent = ({onChange, form, onSubmit, errors, onClear}) => {
           style={styles.logoImage}
         />
         <Text style={text.primaryText}>Welcome To Heartly</Text>
+        <Text>{error}</Text>
         <Input
           label="FirstName"
           onChangeText={value => onChange({name: 'firstName', value})}

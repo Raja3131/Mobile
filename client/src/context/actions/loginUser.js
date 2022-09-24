@@ -13,9 +13,10 @@ export default ({email: email, mobile: mobile}) =>
         email: email,
         mobile: mobile,
       });
-      console.log(res.data.data)
-      AsyncStorage.setItem('email',res.data.data)
+      console.log(res.data)
       if (res.data.status == 200) {
+      AsyncStorage.setItem('email',res.data)
+
         dispatch({
           type: ACTION_TYPES.LOGIN_SUCCESS,
           payload: res.data,

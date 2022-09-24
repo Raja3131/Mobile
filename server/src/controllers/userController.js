@@ -1,23 +1,27 @@
+import { ErrorResponse } from '../utils/errorResponse.js';
 import User from './../models/userModel.js';
 
-export const Register = async (req,res) => {
-try {
-    const newUser = new User(req.body)
-    if(isUserExist){
-      res.status(403).json({
-        status:400,
+export const Register = async (req,res,next) => {
+  const {email} = req.body
+  try {
+   
+    const newUser = await User.isThisEmailInUse(email);
+    if (!newUser)
+    return res.json({
       success: false,
-      message: "User Already exists",
-      })
-    }
-    await newUser.save();
+      message: 'This email is already in use, try sign-in',
+    });
+    const user = await User({
+      email,
+    });
+    await user.save();
     res.status(201).json({
         status: 201,
         data: newUser,
       });
+    }
     
-    
-} catch (error) {
+   catch (error) {
     return res.status(400).json({
         status: 400,
         message: error.message,
@@ -27,6 +31,7 @@ try {
 
 export const Login = async(req, res) => {
     const { email, password } = req.body;
+    
    try {
     const user = await User.findOne({ email });
     if (!user)
