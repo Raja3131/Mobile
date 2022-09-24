@@ -44,12 +44,12 @@ const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLog
 
         {error && !error.error && (
             <Text
-             
+            style={styles.errorMsg} 
               
             >{error}</Text>
           )}
 
-          {error?.error && <Text >This email is already in use, try sign-in</Text>}
+          {error?.error && <Text style={styles.errorMsg}>{error}</Text>}
         <View style={styles.createSection}>
             <Text style={styles.infoText}>Don't have an account?</Text>
             <Pressable

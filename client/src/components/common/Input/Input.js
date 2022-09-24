@@ -17,7 +17,7 @@ const Input = ({label,onChangeText,value,error,...props}) => {
     return (
         <>
         <View style={styles.InputContainer}>
-        {label && <Text>{label}</Text>}
+        {label && <Text style={styles.textInput}>{label}</Text>}
         <View
         style={[
           styles.wrapper,
@@ -36,6 +36,7 @@ const Input = ({label,onChangeText,value,error,...props}) => {
           onBlur={() => {
             setFocused(false);
           }}
+          placeholderTextColor="#555" 
           {...props}
         />
       </View>

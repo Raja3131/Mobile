@@ -16,8 +16,14 @@ export default StyleSheet.create({
     
       infoText: {
         fontSize: 17,
+        color: appColors.Blue,
+
       },
       createSection:{
-        alignItems:'center'
+        alignItems:'center',
+        backgroundColor:'black'
+      },
+      errorMsg:{
+        color:'red'
       }
 })

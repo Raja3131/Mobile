@@ -9,6 +9,8 @@ export default StyleSheet.create({
     
       infoText: {
         fontSize: 17,
+        color: appColors.Blue,
+
       },
       logoImage:{
         height: 100,
@@ -17,5 +19,8 @@ export default StyleSheet.create({
       },
       createSection:{
         alignItems:'center'
+      },
+      errorMsg:{
+        color:'red'
       }
 })

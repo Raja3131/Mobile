@@ -7,20 +7,22 @@ import {useFocusEffect} from '@react-navigation/native';
 import {GlobalContext} from '../../context/Provider';
 import registerUser, {clearAuthState} from '../../context/actions/registerUser';
 import {ROUTE_NAMES} from '../../constants/routeNames';
+import { useEffect } from 'react';
 
 const Register = () => {
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState({});
-  const [editable,setEditable] = useState(false)
+  const [editable, setEditable] = useState(false);
   const {
     authDispatch,
     authState: {error, loading, data},
   } = useContext(GlobalContext);
   const emailCheck =
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const mobileCheck = /^(\+\d{1,3}[- ]?)?\d{10}$/;
+  const mobileCheck = /^[6-9]\d{9}$/;
   const {navigate} = useNavigation();
-  useFocusEffect(
+
+  useEffect(
     React.useCallback(() => {
       return () => {
         if (data || error) {
@@ -39,8 +41,7 @@ const Register = () => {
       ['password']: '',
       ['confirmPassword']: '',
     });
-      setEditable(false)
-
+    setEditable(false);
   };
 
   const onChange = ({name, value}) => {
@@ -56,22 +57,28 @@ const Register = () => {
             return {...prev, [name]: null};
           });
         }
-      } 
-      else if(name==='confirmPassword'){
-        if(value!==form.password){
-          console.log(value,form.password)
+      } else if (name == 'mobile') {
+        if (!mobileCheck.test(value)) {
           setErrors(prev => {
-            return {...prev, [name]: 'Password not match'};
+            return {...prev, [name]: 'Invalid Mobile'};
           });
-        }
-        else{
+        } else {
           setErrors(prev => {
             return {...prev, [name]: null};
           });
         }
-      }
-      
-      else if (name === 'password' || name === 'confirmPassword') {
+      } else if (name === 'confirmPassword') {
+        if (value !== form.password) {
+          console.log(value, form.password);
+          setErrors(prev => {
+            return {...prev, [name]: 'Password not match'};
+          });
+        } else {
+          setErrors(prev => {
+            return {...prev, [name]: null};
+          });
+        }
+      } else if (name === 'password' || name === 'confirmPassword') {
         if (value.length < 8) {
           setErrors(prev => {
             return {...prev, [name]: 'This field needs min 8 characters'};
@@ -80,18 +87,14 @@ const Register = () => {
           setErrors(prev => {
             return {...prev, [name]: null};
           });
-          setEditable(true)
+          setEditable(true);
         }
-      } 
-     
-      else {
+      } else {
         setErrors(prev => {
           return {...prev, [name]: null};
         });
       }
-    } 
-    
-    else {
+    } else {
       setErrors(prev => {
         return {...prev, [name]: 'This field is required'};
       });
@@ -101,9 +104,19 @@ const Register = () => {
   const onSubmit = async () => {
     try {
       registerUser(form)(authDispatch);
-      if (!error) {
+      if (error!==null) {
         Alert.alert('Registration Successfully');
         navigate(ROUTE_NAMES.LOGIN);
+      }
+      else{
+        Alert.alert(
+          'Error',
+          'My Alert Msg', // <- this part is optional, you can pass an empty string
+          [
+            {text: 'OK', onPress: () => clearAuthState()(authDispatch)},
+          ],
+          {cancelable: false},
+        );
       }
     } catch (error) {
       Alert.alert('Error');
