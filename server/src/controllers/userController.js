@@ -3,6 +3,13 @@ import User from './../models/userModel.js';
 export const Register = async (req,res) => {
 try {
     const newUser = new User(req.body)
+    if(isUserExist){
+      res.status(403).json({
+        status:400,
+      success: false,
+      message: "User Already exists",
+      })
+    }
     await newUser.save();
     res.status(201).json({
         status: 201,
@@ -13,7 +20,7 @@ try {
 } catch (error) {
     return res.status(400).json({
         status: 400,
-        message: err.message,
+        message: error.message,
       });
 }    
 }
@@ -38,7 +45,7 @@ export const Login = async(req, res) => {
    } catch (error) {
     return res.status(400).json({
         status: 400,
-        message: err.message,
+        message: error.message,
         error: "error"
       });
    }

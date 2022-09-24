@@ -44,7 +44,7 @@ const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLog
             <Text
              
               
-            >invalid credentials</Text>
+            >{error}</Text>
           )}
 
           {error?.error && <Text >Nothing</Text>}
