@@ -15,7 +15,7 @@ import Container from './../common/container/Container';
 import {text} from '../../styles/Global';
 import styles from './styles';
 import {ROUTE_NAMES} from '../../constants/routeNames';
-const RegisterComponent = ({onChange, form, onSubmit, errors, onClear,error}) => {
+const RegisterComponent = ({onChange, form, onSubmit, errors, onClear,error,editable}) => {
   const {navigate} = useNavigation();
 
   return (
@@ -73,18 +73,23 @@ const RegisterComponent = ({onChange, form, onSubmit, errors, onClear,error}) =>
           onChangeText={value => onChange({name: 'password', value})}
           value={form.password}
           error={errors.password}
-          secureTextEntry={true}
+          // secureTextEntry={true}
+          contextMenuHidden={true}
         />
         <Input
           label="Confirm Password"
           onChangeText={value => onChange({name: 'confirmPassword', value})}
           value={form.confirmPassword}
           error={errors.confirmPassword}
-          secureTextEntry={true}
+          // secureTextEntry={true}
+          contextMenuHidden={true}
+          editable={editable} 
+          selectTextOnFocus={false}
+
         />
         <CustomButton
           loading={false}
-          disabled={!form.confirmPassword}
+          disabled={errors.email||errors.password||errors.mobile||!(form.email&&form.mobile&&form.password&&form.confirmPassword)?true:false}
           title="SignUp"
           onPress={onSubmit}
           primary

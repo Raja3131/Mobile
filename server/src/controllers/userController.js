@@ -52,7 +52,7 @@ export const Login = async(req, res) => {
     if(user){
         res.status(200).json({
             status: 200,
-            data: user.email,
+            data: user
             
           });
     }

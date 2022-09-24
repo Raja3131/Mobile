@@ -39,7 +39,7 @@ const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLog
         <Input label="Password" onChangeText={(value)=>onChange({name:'password',value})} value={form.password} placeholder="Enter Password"
         error={errors.password}
          />
-        <CustomButton title="Login" loading={loading} disabled={errors.email||errors.password?true:false} primary onPress={onSubmit}/>
+        <CustomButton title="Login" loading={loading} disabled={errors.email||errors.password||errors.mobile||!(form.email&&form.mobile&&form.password)?true:false} primary onPress={onSubmit}/>
         <CustomButton title="Clear" loading={loading} disabled={!(form.email||form.mobile||form.password)} primary onPress={onClear}/>
 
         {error && !error.error && (

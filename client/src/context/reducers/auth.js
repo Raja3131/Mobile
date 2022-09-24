@@ -17,7 +17,7 @@ const auth = (state, {type, payload}) => {
       return {
         ...state,
         loading: false,
-        data: payload,
+        data: [payload],
         isLoggedIn: true,
       };
     case ACTION_TYPES.LOGOUT_USER:
