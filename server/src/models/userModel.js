@@ -19,6 +19,8 @@ const userSchema = new mongoose.Schema({
   },
   mobile: {
     type: String,
+    unique:[true,"Mobile number Already Exists"],
+    required:[true,"Please Provide Mobile Number"]
   },
   city: {
     type: String,
@@ -47,6 +49,7 @@ userSchema.methods.comparePassword = async function (password) {
 
   try {
     const result = await bcrypt.compare(password, this.password);
+    
     return result;
   } catch (error) {
     console.log('Error while comparing password!', error.message);
@@ -66,5 +69,18 @@ userSchema.statics.isThisEmailInUse = async function (email) {
     return false;
   }
 };
+userSchema.statics.isThisMobileInUse = async function (mobile) {
+  if (!mobile) throw new Error('Invalid mobile');
+  try {
+    const user = await this.findOne({ mobile });
+    if (user) return false;
+
+    return true;
+  } catch (error) {
+    console.log('error inside isThisEmailInUse method', error.message);
+    return false;
+  }
+};
+
 const User = mongoose.model('User', userSchema);
 export default User;

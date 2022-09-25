@@ -5,6 +5,7 @@ import LoginComponent from '../../components/LoginComponent/LoginComponent';
 import {GlobalContext} from './../../context/Provider';
 import loginUser from '../../context/actions/loginUser';
 import formValidators from '../../utils/formValidator';
+import { clearAuthState } from '../../context/actions/registerUser';
 const Login = () => {
   const [form, setForm] = useState({});
   const [errors,setErrors] = useState({});
@@ -15,8 +16,18 @@ const Login = () => {
   } = useContext(GlobalContext);
   const {params} = useRoute();
   const emailCheck = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const mobileCheck = /^[6-9]\d{9}$/;
+  useEffect(
+    React.useCallback(() => {
+      return () => {
+        if (data || error) {
+          clearAuthState()(authDispatch);
+        }
+      };
+    }, [data, error]),
+  );
   const onSubmit = () => {
-    if (form.email && form.mobile) {
+    if (form.mobile && form.password) {
      
 
       loginUser(form)(authDispatch);
@@ -27,19 +38,31 @@ const Login = () => {
     setForm({...form,[name]:value})
     if (value !== '') {
      
-    if (name ==='email') {
-        if (!emailCheck.test(value)) {
-          setErrors((prev) => {
-            return {...prev, [name]: 'Invalid Email'};
-          });
-        } 
+    // if (name ==='email') {
+    //     if (!emailCheck.test(value)) {
+    //       setErrors((prev) => {
+    //         return {...prev, [name]: 'Invalid Email'};
+    //       });
+    //     } 
         
-        else {
-          setErrors((prev) => {
-            return {...prev, [name]: null};
-          });
-        }
+    //     else {
+    //       setErrors((prev) => {
+    //         return {...prev, [name]: null};
+    //       });
+    //     }
+    //   }
+    if (name == 'mobile') {
+      if (!mobileCheck.test(value)) {
+        setErrors(prev => {
+          return {...prev, [name]: 'Invalid Mobile'};
+        });
+      } else {
+        setErrors(prev => {
+          return {...prev, [name]: null};
+        });
       }
+    } 
+      
        else if (name === 'password' || name === 'confirmPassword') {
         if (value.length < 8) {
           setErrors((prev) => {

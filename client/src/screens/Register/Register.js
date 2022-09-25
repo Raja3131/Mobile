@@ -7,7 +7,8 @@ import {useFocusEffect} from '@react-navigation/native';
 import {GlobalContext} from '../../context/Provider';
 import registerUser, {clearAuthState} from '../../context/actions/registerUser';
 import {ROUTE_NAMES} from '../../constants/routeNames';
-import { useEffect } from 'react';
+import {useEffect} from 'react';
+import axiosInstance from '../../helpers/axiosInstance';
 
 const Register = () => {
   const [errors, setErrors] = useState({});
@@ -102,25 +103,26 @@ const Register = () => {
   };
 
   const onSubmit = async () => {
-    try {
-      registerUser(form)(authDispatch);
-      if (error!==null) {
-        Alert.alert('Registration Successfully');
-        navigate(ROUTE_NAMES.LOGIN);
-      }
-      else{
-        Alert.alert(
-          'Error',
-          'My Alert Msg', // <- this part is optional, you can pass an empty string
-          [
-            {text: 'OK', onPress: () => clearAuthState()(authDispatch)},
-          ],
-          {cancelable: false},
-        );
-      }
-    } catch (error) {
-      Alert.alert('Error');
-    }
+    axiosInstance
+      .post('/register', {
+        firstName: form.firstName,
+        lastName: form.lastName,
+        email: form.email,
+        mobile: form.mobile,
+        city: form.city,
+        password: form.password,
+        confirmPassword: form.confirmPassword,
+      })
+      .then(res => {
+        console.log(res.data);
+        if (res.data.status === 201) {
+          Alert.alert('Success');
+
+          navigate(ROUTE_NAMES.LOGIN);
+        } else {
+          Alert.alert(res.data.message);
+        }
+      });
   };
 
   return (

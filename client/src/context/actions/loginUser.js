@@ -3,14 +3,14 @@ import axiosInstance from '../../helpers/axiosInstance';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-export default ({email: email, password: password}) =>
+export default ({mobile:mobile, password: password}) =>
   async dispatch => {
     dispatch({
       type: ACTION_TYPES.LOGIN_LOADING,
     });
     try {
       const res = await axiosInstance.post('/login', {
-        email: email,
+        mobile: mobile,
         password: password,
       });
       console.log(res.data.message)

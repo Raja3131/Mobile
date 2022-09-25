@@ -1,6 +1,9 @@
 import {ACTION_TYPES} from '../../constants/actionTypes';
+import { ROUTE_NAMES } from '../../constants/routeNames';
 import axiosInstance from '../../helpers/axiosInstance';
+import {useNavigation} from '@react-navigation/native'
 export const clearAuthState = () => dispatch => {
+  
   dispatch({
     type: ACTION_TYPES.CLEAR_AUTH_STATE,
   });
@@ -23,23 +26,11 @@ export default ({
         firstName:firstName,
         lastName:lastName
       })
-      if(res.data.status==200){
-        dispatch({
-          type: REGISTER_SUCCESS,
-          payload: res.data,
-        });
-        
-      }
-      else{
-        dispatch({
-          type: ACTION_TYPES.REGISTER_FAIL,
-          payload: res.data.message
-            ? res.data.message
-            : res.data.message,
-        });
-        console.log(res.data.message)
-      }
-      
+     dispatch({
+      type:ACTION_TYPES.REGISTER_SUCCESS,
+      payload:res.data
+     })
+     useNavigation.navigate(ROUTE_NAMES.LOGIN)
     } catch (error) {
       dispatch({
         type: ACTION_TYPES.REGISTER_FAIL,
