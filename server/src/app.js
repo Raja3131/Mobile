@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import cors from 'cors'
+import Validate from 'express-validator'
 import userRouter from './routes/userRoutes.js'
 const app = express()
 app.use(express.json())
@@ -23,3 +24,11 @@ const connectDBandStartServer = async () => {
   };
   connectDBandStartServer();
   app.use('/',userRouter)
+  app.use(function(err, req, res, next) {
+    // specific for validation errors
+    if (err instanceof Validate.ValidationError)
+      return res.status(err.status).json(err);
+  
+    // other type of errors, it *might* also be a Runtime Error
+    return res.status(500).send(err.stack);
+  });

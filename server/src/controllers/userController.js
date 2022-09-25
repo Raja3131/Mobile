@@ -16,7 +16,7 @@ export const Register = async (req, res, next) => {
     if (!newUser)
       return res.json({
         success: false,
-        message: "This email is already in use, try sign-in",
+        message: "This email is already in use",
       });
     const newMobile = await User.isThisMobileInUse(mobile);
     if (!newMobile) {
@@ -52,18 +52,15 @@ export const Login = async (req, res) => {
   const { password, mobile } = req.body;
 
   try {
-    const user = await User.findOne({ mobile  });
-    
-  
-    if (!user){
+    const user = await User.findOne({ mobile });
+
+    if (!user) {
       return res.json({
         status: 400,
         success: false,
         message: "User not found, try sign-up",
       });
-      
     }
-     
 
     const isMatch = await user.comparePassword(password);
     if (!isMatch) {

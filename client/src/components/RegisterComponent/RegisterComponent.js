@@ -83,6 +83,7 @@ const RegisterComponent = ({
           error={errors.password}
           secureTextEntry={true}
           contextMenuHidden={true}
+          maxLength={20}
           placeholder="Password"
         />
         <Input
@@ -95,6 +96,8 @@ const RegisterComponent = ({
           editable={editable}
           selectTextOnFocus={false}
           placeholder="Confirm Password"
+          maxLength={20}
+
         />
         <CustomButton
           loading={false}

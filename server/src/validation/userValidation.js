@@ -14,9 +14,7 @@ const signUpValidator = [
       .trim()
       .not()
       .isEmpty()
-      .withMessage('Password is empty!')
-      .isLength({ min: 8, max: 20 })
-      .withMessage('Password must be 3 to 20 characters long!'),
+      .withMessage('Password is empty!'),
     check('confirmPassword')
       .trim()
       .not()
@@ -30,7 +28,12 @@ const signUpValidator = [
       (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty())
-            return res.status(400).json({ errors: errors.array() });
+            // return res.status(400).json({ errors: errors.array() });
+            return res.json({
+              status: 400,
+              success: false,
+              message: "both password must be same",
+            });
         next();
     },
   ];

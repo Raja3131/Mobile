@@ -79,7 +79,9 @@ const Register = () => {
             return {...prev, [name]: null};
           });
         }
-      } else if (name === 'password' || name === 'confirmPassword') {
+      } 
+     
+      else if (name === 'password' || name === 'confirmPassword') {
         if (value.length < 8) {
           setErrors(prev => {
             return {...prev, [name]: 'This field needs min 8 characters'};
@@ -119,7 +121,12 @@ const Register = () => {
           Alert.alert('Success');
 
           navigate(ROUTE_NAMES.LOGIN);
-        } else {
+        }
+        // else if(res.data.status===400){
+        //   Alert.alert('Both password should be same');
+
+        // } 
+        else {
           Alert.alert(res.data.message);
         }
       });
