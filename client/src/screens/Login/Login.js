@@ -10,6 +10,7 @@ const Login = () => {
   const [form, setForm] = useState({});
   const [errors,setErrors] = useState({});
   const [justSignedUp, setJustSignedUp] = useState(null);
+
   const {
     authDispatch,
     authState: {error, loading, isLoggedIn, data},
@@ -96,6 +97,7 @@ const Login = () => {
       ['password']:'',
     })
   }
+ 
 
   return (
     <>
@@ -110,6 +112,7 @@ const Login = () => {
         data={data}
         onClear={onClear}
         errors={errors}
+   
       />
     </>
   );

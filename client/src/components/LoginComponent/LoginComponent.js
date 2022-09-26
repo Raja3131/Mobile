@@ -1,5 +1,5 @@
-import { View, Text, Image, Pressable, Alert } from 'react-native';
-import React, { useRef } from 'react';
+import { View, Text, Image, Pressable, Alert, TouchableOpacity } from 'react-native';
+import React, { useRef, useState } from 'react';
 import Input from '../common/Input/Input';
 import CustomButton from '../common/CustomButton/CustomButton';
 import Container from '../common/container/Container';
@@ -9,9 +9,10 @@ import { ROUTE_NAMES } from './../../constants/routeNames';
 import { useNavigation } from '@react-navigation/native';
 import Icon from '../common/Icon/Icon';
 import appColors from '../../styles/appColors';
-const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLoggedIn,data,onClear,errors}) => {
+const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLoggedIn,data,onClear,errors,onHidePassword,secureEntry}) => {
     const {navigate} = useNavigation()
     const input = useRef(null)
+    const [isSecureEntry, setIsSecureEntry] = useState(true);
    
   return (
     <>
@@ -39,12 +40,22 @@ const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLog
 
         />
         <Input label="Password" onChangeText={(value)=>onChange({name:'password',value})} value={form.password} placeholder="Enter Password"
-        error={errors.password} secureTextEntry={true} icon={<Icon
+        error={errors.password} secureTextEntry={isSecureEntry} icon={ <TouchableOpacity
+          onPress={() => {
+            setIsSecureEntry((prev) => !prev);
+          }}>
+          <Text>{isSecureEntry ?  <Icon
+        size={21}
+        name="eye-off"
+        type="feather"
+        color={appColors.Blue}
+      />   :<Icon
           size={21}
           name="eye"
-          type="evil"
+          type="feather"
           color={appColors.Blue}
-        />} iconPosition="right"
+        /> }</Text>
+        </TouchableOpacity>} iconPosition="right"
          />
         <CustomButton title="Login" loading={loading} disabled={errors.password||errors.mobile||!(form.mobile&&form.password)?true:false} primary onPress={onSubmit}/>
         <CustomButton title="Clear" disabled={!(form.mobile||form.password)} primary onPress={onClear}/>
