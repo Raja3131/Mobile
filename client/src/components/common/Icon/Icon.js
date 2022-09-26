@@ -13,6 +13,8 @@ import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+
 
 const getIconFont = (type) => {
   switch (type) {

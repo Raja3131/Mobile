@@ -5,50 +5,53 @@ import React,{useContext} from 'react'
 import { ROUTE_NAMES } from '../constants/routeNames';
 import logoutUser from '../context/actions/logoutUser';
 import { GlobalContext } from '../context/Provider';
+import CustomDrawer from '../components/CustomDrawer';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import { useState } from 'react';
 import { useEffect } from 'react';
+import Icon from '../components/common/Icon/Icon';
+import appColors from '../styles/appColors';
+import { Home } from '../screens/Home/Home';
 
-export const Home = () =>{
-
-
- 
-  const {
-    authDispatch,
-    authState: {error, loading, isLoggedIn, data},
-  } = useContext(GlobalContext);
-  console.log(Object.values(data))
-  const onLogOut = () =>{
-    logoutUser()(authDispatch)
-  }
-  return(<>
-  <View>
-    <Pressable
-    onPress={onLogOut}
-    >
-      <Text>LogOut</Text>
-      {/* <Text>{data}</Text> */}
-    </Pressable>
-  </View>
-  </>)
-}
 const DrawerNavigator = () => {
     const Drawer = createDrawerNavigator();
   return (
    <>
-     <Drawer.Navigator
-      initialRouteName="Back"
-      screenOptions={{
-        drawerStyle: {
-          backgroundColor: '#fff',
-          width: 200,
-        },
+      <Drawer.Navigator
+      drawerContent={props => <CustomDrawer {...props} />}
+      screenOptions={({ navigation }) => ({
+        
+        headerShown: true,
+        drawerActiveBackgroundColor: appColors.Blue,
+        drawerActiveTintColor: '#fff',
+        drawerInactiveTintColor: '#333',
         drawerLabelStyle: {
-          color: '#009387',
-          fontWeight: 'bold',
-          fontSize: 20,
+          marginLeft: -25,
+          fontFamily: 'Roboto-Medium',
+          fontSize: 15,
         },
-      }}>
-        <Drawer.Screen name="Home" component={Home} />
+        headerTitle: '',
+        headerLeft: () =>
+        <Pressable onPress={navigation.toggleDrawer}>
+          <Text>
+            <Icon
+             size={21}
+             name="menu"
+             type="feather"
+             color={appColors.Blue}/>
+          </Text>
+         </Pressable >
+      })}>
+        <Drawer.Screen name="Home" component={Home} options={{
+          drawerIcon: ({color}) => (
+            <Icon
+             size={21}
+             name="home"
+             type="feather"
+             color={appColors.white}/>
+          ),
+        }}/>
 
       </Drawer.Navigator>
    </>
