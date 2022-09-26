@@ -10,6 +10,7 @@ const Login = () => {
   const [form, setForm] = useState({});
   const [errors,setErrors] = useState({});
   const [justSignedUp, setJustSignedUp] = useState(null);
+  
 
   const {
     authDispatch,
@@ -38,20 +39,6 @@ const Login = () => {
     setForm({...form, [name]: value});
     setForm({...form,[name]:value})
     if (value !== '') {
-     
-    // if (name ==='email') {
-    //     if (!emailCheck.test(value)) {
-    //       setErrors((prev) => {
-    //         return {...prev, [name]: 'Invalid Email'};
-    //       });
-    //     } 
-        
-    //     else {
-    //       setErrors((prev) => {
-    //         return {...prev, [name]: null};
-    //       });
-    //     }
-    //   }
     if (name == 'mobile') {
       if (!mobileCheck.test(value)) {
         setErrors(prev => {

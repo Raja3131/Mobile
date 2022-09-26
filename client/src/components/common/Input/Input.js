@@ -4,7 +4,7 @@ import appColors from '../../../styles/appColors'
 import styles from './styles';
 
 
-const Input = ({label,onChangeText,value,error,icon,iconPosition,...props}) => {
+const Input = ({label,onChangeText,value,error,icon,iconPosition,enteringText,...props}) => {
     const [focused, setFocused] = React.useState(false);
     const getBorderColor = () =>{
       if(focused){
@@ -50,7 +50,7 @@ const Input = ({label,onChangeText,value,error,icon,iconPosition,...props}) => {
         />
       </View>
 
-      {error && <Text style={styles.error}>{error}</Text>}
+      {focused?null:error && <Text style={styles.error}>{error}</Text>}
         </View>
         </>
     )

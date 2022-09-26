@@ -9,7 +9,8 @@ import { ROUTE_NAMES } from './../../constants/routeNames';
 import { useNavigation } from '@react-navigation/native';
 import Icon from '../common/Icon/Icon';
 import appColors from '../../styles/appColors';
-const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLoggedIn,data,onClear,errors,onHidePassword,secureEntry}) => {
+import Message from '../common/Message/Message';
+const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLoggedIn,data,onClear,errors}) => {
     const {navigate} = useNavigation()
     const input = useRef(null)
     const [isSecureEntry, setIsSecureEntry] = useState(true);
@@ -61,13 +62,16 @@ const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLog
         <CustomButton title="Clear" disabled={!(form.mobile||form.password)} primary onPress={onClear}/>
 
         {error && !error.error && (
-            <Text
-            style={styles.errorMsg} 
-              
-            >{error}</Text>
+            <Message
+            onDismiss={() => {
+
+            }}
+            danger
+            message={error}
+          />
           )}
 
-          {error?.error && <Text style={styles.errorMsg}>{error}</Text>}
+          {error?.error && <Message danger message={error?.error} />}
         <View style={styles.createSection}>
             <Text style={styles.infoText}>Don't have an account?</Text>
             <Pressable

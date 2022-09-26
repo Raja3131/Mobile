@@ -6,6 +6,7 @@ import {
   Alert,
   ScrollView,
   SafeAreaView,
+  TouchableOpacity
 } from 'react-native';
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -15,6 +16,8 @@ import Container from './../common/container/Container';
 import {text} from '../../styles/Global';
 import styles from './styles';
 import {ROUTE_NAMES} from '../../constants/routeNames';
+import appColors from '../../styles/appColors';
+import Icon from '../common/Icon/Icon';
 const RegisterComponent = ({
   onChange,
   form,
@@ -25,6 +28,8 @@ const RegisterComponent = ({
   editable,
 }) => {
   const {navigate} = useNavigation();
+  const [isSecureEntry, setIsSecureEntry] = useState(true);
+
 
   return (
     <>
@@ -85,6 +90,22 @@ const RegisterComponent = ({
           contextMenuHidden={true}
           maxLength={20}
           placeholder="Password"
+          icon={ <TouchableOpacity
+            onPress={() => {
+              setIsSecureEntry((prev) => !prev);
+            }}>
+            <Text>{isSecureEntry ?  <Icon
+          size={21}
+          name="eye-off"
+          type="feather"
+          color={appColors.Blue}
+        />   :<Icon
+            size={21}
+            name="eye"
+            type="feather"
+            color={appColors.Blue}
+          /> }</Text>
+          </TouchableOpacity>} iconPosition="right"
         />
         <Input
           label="Confirm Password"
@@ -97,6 +118,22 @@ const RegisterComponent = ({
           selectTextOnFocus={false}
           placeholder="Confirm Password"
           maxLength={20}
+          icon={ <TouchableOpacity
+            onPress={() => {
+              setIsSecureEntry((prev) => !prev);
+            }}>
+            <Text>{isSecureEntry ?  <Icon
+          size={21}
+          name="eye-off"
+          type="feather"
+          color={appColors.Blue}
+        />   :<Icon
+            size={21}
+            name="eye"
+            type="feather"
+            color={appColors.Blue}
+          /> }</Text>
+          </TouchableOpacity>} iconPosition="right"
 
         />
         <CustomButton
