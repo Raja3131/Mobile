@@ -120,7 +120,7 @@ const Register = () => {
       .then(res => {
         console.log(res.data);
         if (res.data.status === 201) {
-          Alert.alert('Success');
+          Alert.alert('Register successful');
 
           navigate(ROUTE_NAMES.LOGIN);
         }
