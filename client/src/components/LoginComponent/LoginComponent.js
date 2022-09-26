@@ -7,6 +7,8 @@ import styles from './styles';
 import {text} from '../../styles/Global';
 import { ROUTE_NAMES } from './../../constants/routeNames';
 import { useNavigation } from '@react-navigation/native';
+import Icon from '../common/Icon/Icon';
+import appColors from '../../styles/appColors';
 const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLoggedIn,data,onClear,errors}) => {
     const {navigate} = useNavigation()
     const input = useRef(null)
@@ -37,10 +39,15 @@ const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLog
 
         />
         <Input label="Password" onChangeText={(value)=>onChange({name:'password',value})} value={form.password} placeholder="Enter Password"
-        error={errors.password}
+        error={errors.password} secureTextEntry={true} icon={<Icon
+          size={21}
+          name="eye"
+          type="evil"
+          color={appColors.Blue}
+        />} iconPosition="right"
          />
         <CustomButton title="Login" loading={loading} disabled={errors.password||errors.mobile||!(form.mobile&&form.password)?true:false} primary onPress={onSubmit}/>
-        <CustomButton title="Clear" loading={loading} disabled={!(form.mobile||form.password)} primary onPress={onClear}/>
+        <CustomButton title="Clear" disabled={!(form.mobile||form.password)} primary onPress={onClear}/>
 
         {error && !error.error && (
             <Text
@@ -57,8 +64,10 @@ const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLog
                 navigate(ROUTE_NAMES.REGISTER)
               }}>
               <Text style={styles.linkBtn}>Register</Text>
+              
             </Pressable>
           </View>
+         
       </Container>
     </>
   );

@@ -4,7 +4,7 @@ import appColors from '../../../styles/appColors'
 import styles from './styles';
 
 
-const Input = ({label,onChangeText,value,error,...props}) => {
+const Input = ({label,onChangeText,value,error,icon,iconPosition,...props}) => {
     const [focused, setFocused] = React.useState(false);
     const getBorderColor = () =>{
       if(focused){
@@ -14,6 +14,15 @@ const Input = ({label,onChangeText,value,error,...props}) => {
         return appColors.grey
       }
     }
+    const getFlexDirection = () => {
+      if (icon && iconPosition) {
+        if (iconPosition === 'left') {
+          return 'row';
+        } else if (iconPosition === 'right') {
+          return 'row-reverse';
+        }
+      }
+    };
     return (
         <>
         <View style={styles.InputContainer}>
@@ -21,10 +30,10 @@ const Input = ({label,onChangeText,value,error,...props}) => {
         <View
         style={[
           styles.wrapper,
-          // {alignItems: icon ? 'center' : 'baseline'},
-          {borderColor: getBorderColor(), },
+          {alignItems: icon ? 'center' : 'baseline'},
+          {borderColor: getBorderColor(),flexDirection: getFlexDirection() },
         ]}>
-        {/* <View>{icon && icon}</View> */}
+        <View>{icon && icon}</View>
 
         <TextInput
           style={[styles.textInput, ]}

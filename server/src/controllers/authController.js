@@ -1,5 +1,6 @@
 import { ErrorResponse } from "../utils/errorResponse.js";
-import User from "./../models/userModel.js";
+import User from "../models/userModel.js";
+import jwt from "jsonwebtoken";
 
 export const Register = async (req, res, next) => {
   const {
@@ -70,17 +71,59 @@ export const Login = async (req, res) => {
         message: "Password doesn't match",
       });
     }
-    if (user) {
-      res.status(200).json({
-        status: 200,
-        data: user,
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+
+    let oldTokens = user.tokens || [];
+
+    if (oldTokens.length) {
+      oldTokens = oldTokens.filter((t) => {
+        const timeDiff = (Date.now() - parseInt(t.signedAt)) / 1000;
+        if (timeDiff < 86400) {
+          return t;
+        }
       });
     }
+
+    await User.findByIdAndUpdate(user._id, {
+      tokens: [...oldTokens, { token, signedAt: Date.now().toString() }],
+    });
+
+    res.json({ success: true, user: user, token });
   } catch (error) {
     return res.status(400).json({
       status: 400,
       message: error.message,
       error: "error",
     });
+  }
+};
+
+export const LogOut = async (req, res) => {
+  try {
+    if (req.headers && req.headers.authorization) {
+      const token = req.headers.authorization.split(" ")[1];
+      if (!token) {
+        return res
+          .status(401)
+          .json({ success: false, message: "Authorization fail!" });
+      }
+
+      const tokens = req.user.tokens;
+
+      const newTokens = tokens.filter((t) => t.token !== token);
+
+      await User.findByIdAndUpdate(req.user._id, { tokens: newTokens });
+      res.json({ success: true, message: "Sign out successfully!" });
+    }
+  } catch (error) {
+    return res
+      .status(401)
+      .json({
+        success: false,
+        message: "Authorization fail!",
+        error: error.message,
+      });
   }
 };

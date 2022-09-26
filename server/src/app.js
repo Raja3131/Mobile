@@ -3,18 +3,19 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import Validate from 'express-validator'
-import userRouter from './routes/userRoutes.js'
+import authRouter from './routes/authRoutes.js'
 const app = express()
 app.use(express.json())
 app.use(cors())
+dotenv.config()
 const connectDBandStartServer = async () => {
     try {
-      mongoose.connect('mongodb://localhost:27017/mobile', {
+      mongoose.connect(process.env.DB, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
       console.log("MongoDB Connected");
-      app.listen(5000, () => {
+      app.listen(process.env.PORT, () => {
         console.log(`Server started on port 5000`);
       });
     } catch (err) {
@@ -23,7 +24,7 @@ const connectDBandStartServer = async () => {
     }
   };
   connectDBandStartServer();
-  app.use('/',userRouter)
+  app.use('/',authRouter)
   app.use(function(err, req, res, next) {
     // specific for validation errors
     if (err instanceof Validate.ValidationError)

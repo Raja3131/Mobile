@@ -31,7 +31,14 @@ const userSchema = new mongoose.Schema({
   confirmPassword: {
     type: String,
   },
-});
+  
+  tokens: [{ type: Object }],
+  
+},
+{
+  timestamps: true
+}
+);
 userSchema.pre("save", async function (next) {
 try {
   const salt =await bcrypt.genSalt(10)
@@ -80,6 +87,21 @@ userSchema.statics.isThisMobileInUse = async function (mobile) {
     console.log('error inside isThisEmailInUse method', error.message);
     return false;
   }
+};
+
+userSchema.methods.getResetPasswordToken = function () {
+  const resetToken = crypto.randomBytes(20).toString("hex");
+
+  // Hash token (private key) and save to database
+  this.resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  // Set token expire date
+  this.resetPasswordExpire = Date.now() + 10 * (60 * 1000); // Ten Minutes
+
+  return resetToken;
 };
 
 const User = mongoose.model('User', userSchema);

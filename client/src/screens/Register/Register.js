@@ -20,7 +20,7 @@ const Register = () => {
   } = useContext(GlobalContext);
   const emailCheck =
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const mobileCheck = /^[6-9]\d{9}$/;
+  const mobileCheck = /^[1-9]\d{9}$/;
   const {navigate} = useNavigation();
 
   useEffect(
@@ -58,7 +58,8 @@ const Register = () => {
             return {...prev, [name]: null};
           });
         }
-      } else if (name == 'mobile') {
+      }
+       else if (name == 'mobile') {
         if (!mobileCheck.test(value)) {
           setErrors(prev => {
             return {...prev, [name]: 'Invalid Mobile'};
@@ -68,7 +69,8 @@ const Register = () => {
             return {...prev, [name]: null};
           });
         }
-      } else if (name === 'confirmPassword') {
+      }
+       else if (name === 'confirmPassword') {
         if (value !== form.password) {
           console.log(value, form.password);
           setErrors(prev => {
