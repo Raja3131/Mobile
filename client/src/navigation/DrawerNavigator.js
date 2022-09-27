@@ -13,11 +13,15 @@ import { useEffect } from 'react';
 import Icon from '../components/common/Icon/Icon';
 import appColors from '../styles/appColors';
 import { Home } from '../screens/Home/Home';
+import HomeNavigator from './HomeNavigator';
+import TabNavigator from './TabNavigator';
+import Container from '../components/common/container/Container';
 
 const DrawerNavigator = () => {
     const Drawer = createDrawerNavigator();
   return (
    <>
+   
       <Drawer.Navigator
       drawerContent={props => <CustomDrawer {...props} />}
       screenOptions={({ navigation }) => ({
@@ -43,7 +47,7 @@ const DrawerNavigator = () => {
           </Text>
          </Pressable >
       })}>
-        <Drawer.Screen name="Home" component={Home} options={{
+        <Drawer.Screen name="Home" component={TabNavigator} options={{
           drawerIcon: ({color}) => (
             <Icon
              size={21}
