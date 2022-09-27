@@ -1,6 +1,6 @@
 import {View, Text, Alert} from 'react-native';
 import React, {useRef, useState, useContext} from 'react';
-import RegisterComponent from '../../components/RegisterComponent/RegisterComponent';
+import RegisterComponent from '../../components/AuthComponents/RegisterComponent';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 import {useFocusEffect} from '@react-navigation/native';

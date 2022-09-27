@@ -16,6 +16,7 @@ import { Home } from '../screens/Home/Home';
 import HomeNavigator from './HomeNavigator';
 import TabNavigator from './TabNavigator';
 import Container from '../components/common/container/Container';
+import Profile from '../screens/Profile';
 
 const DrawerNavigator = () => {
     const Drawer = createDrawerNavigator();
@@ -56,6 +57,20 @@ const DrawerNavigator = () => {
              color={appColors.white}/>
           ),
         }}/>
+         <Drawer.Screen name="Profile" component={Profile} options={{
+          drawerIcon: ({color}) => (
+            <Icon
+             size={21}
+             name="user"
+             type="evil"
+             color={appColors.white}/>
+          ),
+          
+        }}
+        screenOptions={{headerShown:false}}
+        />
+        
+        
 
       </Drawer.Navigator>
    </>

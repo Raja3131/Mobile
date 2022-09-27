@@ -11,10 +11,10 @@ import {
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import Input from '../common/Input/Input';
-import CustomButton from './../common/CustomButton/CustomButton';
-import Container from './../common/container/Container';
+import CustomButton from '../common/CustomButton/CustomButton';
+import Container from '../common/container/Container';
 import {text} from '../../styles/Global';
-import styles from './styles';
+import styles from './RegisterStyles';
 import {ROUTE_NAMES} from '../../constants/routeNames';
 import appColors from '../../styles/appColors';
 import Icon from '../common/Icon/Icon';
