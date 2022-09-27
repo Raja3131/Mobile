@@ -33,16 +33,28 @@ const Register = () => {
     }, [data, error]),
   );
   const onClear = () => {
-    setForm({
-      ['firstName']: '',
-      ['lastName']: '',
-      ['email']: '',
-      ['mobile']: '',
-      ['city']: '',
-      ['password']: '',
-      ['confirmPassword']: '',
-    });
-    setEditable(false);
+    Alert.alert('Clear!', 'Are you sure you want to clear?', [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+      },
+
+      {
+        text: 'OK',
+        onPress: () => {
+          setForm({
+            ['firstName']: '',
+            ['lastName']: '',
+            ['email']: '',
+            ['mobile']: '',
+            ['city']: '',
+            ['password']: '',
+            ['confirmPassword']: '',
+          });
+          setEditable(false);
+        },
+      },
+    ]);
   };
 
   const onChange = ({name, value}) => {

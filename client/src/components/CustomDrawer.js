@@ -5,6 +5,7 @@ import {
   ImageBackground,
   Image,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {
   DrawerContentScrollView,
@@ -85,7 +86,19 @@ const CustomDrawer = props => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
-            logoutUser()(authDispatch)
+            Alert.alert('Logout!', 'Are you sure you want to logout?', [
+              {
+                text: 'Cancel',
+                onPress: () => {},
+              },
+        
+              {
+                text: 'OK',
+                onPress: () => {
+                  logoutUser()(authDispatch);
+                },
+              },
+            ]);
 
         }} style={{paddingVertical: 15}}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
