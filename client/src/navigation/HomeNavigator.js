@@ -5,6 +5,7 @@ import GameDetailsScreen from '../screens/GameDetails.Screen';
 import { View,Text } from 'react-native-animatable';
 import { Home } from '../screens/Home/Home';
 import ChangePassword from '../screens/ChangePassword';
+import EditProfile from '../screens/EditProfile';
 
 
 const HomeNavigator = () => {
@@ -19,6 +20,21 @@ const HomeNavigator = () => {
         <Stack.Screen
           name="ChangePassword"
           component={ChangePassword}
+
+          options={({route}) => ({
+            title: route.params?.title,
+            headerBackVisible:true,
+            header: () => null,
+            headerShown: false
+          })}
+          screenOptions={{
+            headerShown: false,
+          }}
+          
+        />
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
 
           options={({route}) => ({
             title: route.params?.title,

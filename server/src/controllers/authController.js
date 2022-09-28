@@ -1,6 +1,7 @@
 import { ErrorResponse } from "../utils/errorResponse.js";
 import User from "../models/userModel.js";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 
 export const Register = async (req, res, next) => {
   const {
@@ -127,3 +128,20 @@ export const LogOut = async (req, res) => {
       });
   }
 };
+
+export const updateAuth = async(req,res,next) =>{
+const {id} = req.params
+const {firstName,lastName,email,mobile} = req.body
+try {
+if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No User with id: ${id}`);
+  const updatedAuth = {firstName,lastName,email,mobile,_id:id}
+  await User.findByIdAndUpdate(id,updatedAuth,{new:true}) 
+  res.status(200).json({
+    updateAuth
+  })
+} catch (error) {
+  res.status(400).json({
+    error:error
+  })
+}
+}

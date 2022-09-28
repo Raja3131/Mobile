@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { GlobalContext } from '../../context/Provider'
 import Container from '../common/container/Container'
 import ProfileStyles from './ProfileStyles'
+import CustomButton from '../common/CustomButton/CustomButton'
 
 
 const ProfileComponent = () => {
@@ -28,6 +29,16 @@ const ProfileComponent = () => {
             >
                    <Text style={{}}> Change Password</Text>
             </Pressable>
+        </View>
+        <View>
+          <CustomButton
+          primary
+          title="Edit"
+          onPress={()=>{
+            navigate("EditProfile")
+          }}
+          />
+
         </View>
         </Container>
     </>
