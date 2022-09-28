@@ -2,7 +2,7 @@ import {View, Text} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import React, {useState, useContext, useEffect} from 'react';
 import LoginComponent from '../../components/AuthComponents/LoginComponent';
-import {GlobalContext} from './../../context/Provider';
+import {GlobalContext} from '../../context/Provider';
 import loginUser from '../../context/actions/loginUser';
 import formValidators from '../../utils/formValidator';
 import { clearAuthState } from '../../context/actions/registerUser';

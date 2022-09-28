@@ -2,7 +2,7 @@ import { View, Text,Pressable,ActivityIndicator,TouchableOpacity } from 'react-n
 import React from 'react'
 import appColors from '../../../styles/appColors'
 import styles from './styles'
-import { buttons } from '../../../styles/Global'
+import {  ButtonStyles } from '../../../styles/Global'
 
 const CustomButton = ({loading,title,disabled,primary,onPress,style,...props}) => {
   const getBgColor = () => {
@@ -16,7 +16,7 @@ const CustomButton = ({loading,title,disabled,primary,onPress,style,...props}) =
     <>
      <Pressable
       disabled={disabled}
-      style={[buttons.primary, {backgroundColor: getBgColor()}, style]}
+      style={[ButtonStyles.primary, {backgroundColor: getBgColor()}, style]}
       onPress={onPress}
       {...props}>
       <View style={[styles.loaderSection]}>

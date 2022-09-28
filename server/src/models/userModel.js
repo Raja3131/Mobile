@@ -31,6 +31,9 @@ const userSchema = new mongoose.Schema({
   confirmPassword: {
     type: String,
   },
+  newPassword: {
+    type:String,
+  },
   
   tokens: [{ type: Object }],
   
@@ -39,23 +42,23 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 }
 );
-userSchema.pre("save", async function (next) {
-try {
-  const salt =await bcrypt.genSalt(10)
-  const hashedPassword = await bcrypt.hash(this.password,salt)
-  this.password =hashedPassword
-  next()
-  console.log(this.password)
-} catch (error) {
-  console.log(error)
-}
+// userSchema.pre("save", async function (next) {
+// try {
+//   const salt =await bcrypt.genSalt(10)
+//   const hashedPassword = await bcrypt.hash(this.password,salt)
+//   this.password =hashedPassword
+//   next()
+//   console.log(this.password)
+// } catch (error) {
+//   console.log(error)
+// }
  
-});
+// });
 userSchema.methods.comparePassword = async function (password) {
   if (!password) throw new Error('Password is mission, can not compare!');
 
   try {
-    const result = await bcrypt.compare(password, this.password);
+    const result = await password===this.password
     
     return result;
   } catch (error) {

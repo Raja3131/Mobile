@@ -1,11 +1,10 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import CartScreen from '../screens/CartScreen';
-import FavoriteScreen from '../screens/FavouriteScreen';
-import GameDetailsScreen from '../screens/GameDetails.Screen';
+
 import { HomeScreen } from './HomeNavigator';
 import HomeNavigator from './HomeNavigator';
 import Icon from '../components/common/Icon/Icon';
+import appColors from '../styles/appColors';
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
@@ -14,7 +13,7 @@ const TabNavigator = () => {
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: false,
-          tabBarStyle: {backgroundColor: '#AD40AF'},
+          tabBarStyle: {backgroundColor: appColors.Blue},
           tabBarInactiveTintColor: '#fff',
           tabBarActiveTintColor: 'yellow',
         }}>
@@ -24,33 +23,14 @@ const TabNavigator = () => {
           options={({route}) => ({
             tabBarStyle: {
               display: getTabBarVisibility(route),
-              backgroundColor: '#AD40AF',
+              backgroundColor: appColors.Blue,
             },
             tabBarIcon: ({color, size}) => (
-              <Icon name="eye" type="feather" color={color} size={size} />
+              <Icon name="home" type="feather" color={color} size={size} />
             ),
           })}
         />
-        <Tab.Screen
-          name="Cart"
-          component={CartScreen}
-          options={{
-            tabBarBadge: 3,
-            tabBarBadgeStyle: {backgroundColor: 'yellow'},
-            tabBarIcon: ({color, size}) => (
-                <Icon name="eye" type="feather" color={color} size={size} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Favorite"
-          component={FavoriteScreen}
-          options={{
-            tabBarIcon: ({color, size}) => (
-                <Icon name="eye" type="feather" color={color} size={size} />
-            ),
-          }}
-        />
+      
       </Tab.Navigator>
     );
   };

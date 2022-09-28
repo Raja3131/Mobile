@@ -13,11 +13,11 @@ import {useNavigation} from '@react-navigation/native';
 import Input from '../common/Input/Input';
 import CustomButton from '../common/CustomButton/CustomButton';
 import Container from '../common/container/Container';
-import {text} from '../../styles/Global';
 import styles from './RegisterStyles';
 import {ROUTE_NAMES} from '../../constants/routeNames';
 import appColors from '../../styles/appColors';
 import Icon from '../common/Icon/Icon';
+import { TextStyles } from '../../styles/Global';
 const RegisterComponent = ({
   onChange,
   form,
@@ -26,6 +26,7 @@ const RegisterComponent = ({
   onClear,
   error,
   editable,
+  component
 }) => {
   const {navigate} = useNavigation();
   const [isSecureEntry, setIsSecureEntry] = useState(true);
@@ -40,7 +41,7 @@ const RegisterComponent = ({
           source={require('../../assets/images/logo.jpg')}
           style={styles.logoImage}
         />
-        <Text style={text.primaryText}>Welcome To Heartly</Text>
+        <Text style={TextStyles.primaryText}>Welcome To Heartly</Text>
         {error && !error.error && <Text style={styles.errorMsg}>{error}</Text>}
 
         {error?.error && <Text>{error}</Text>}
@@ -181,6 +182,9 @@ const RegisterComponent = ({
             <Text style={styles.linkBtn}>Login</Text>
           </Pressable>
         </View>
+        {
+          component
+        }
       </Container>
     </>
   );

@@ -1,7 +1,8 @@
 import {useContext, useEffect} from 'react';
 import {View, Text, Pressable} from 'react-native';
 import {GlobalContext} from '../../context/Provider';
-
+import styles from './styles';
+import { TextStyles } from '../../styles/Global';
 export const Home = () => {
   const {
     authDispatch,
@@ -12,10 +13,7 @@ export const Home = () => {
     logoutUser()(authDispatch);
 
   };
-//   useEffect(()=>{
-//     var result = data.map(dat => ({ value: dat.id, text: dat.firstName }));
-//     console.log(result)
-//   },[])
+
   return (
     <>
       <View
@@ -26,7 +24,11 @@ export const Home = () => {
        {
       
        }
-       <Text>Hi {data['user'].firstName.toUpperCase()}</Text>
+       <View style={styles.Headers}>
+       <Text style={[TextStyles.primaryText,{color:'white'}]}>Welcome To Heartly</Text>
+       <Text style={[TextStyles.secondaryText,{color:'white'}]}>Hi {data['user'].firstName.toUpperCase()}</Text>
+       </View>
+      
       </View>
     </>
   );

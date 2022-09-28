@@ -4,7 +4,7 @@ import Input from '../common/Input/Input';
 import CustomButton from '../common/CustomButton/CustomButton';
 import Container from '../common/container/Container';
 import styles from './LoginStyles';
-import {text} from '../../styles/Global';
+import {text, TextStyles} from '../../styles/Global';
 import { ROUTE_NAMES } from '../../constants/routeNames';
 import { useNavigation } from '@react-navigation/native';
 import Icon from '../common/Icon/Icon';
@@ -25,8 +25,8 @@ const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLog
           source={require('../../assets/images/logo.jpg')}
           style={styles.logoImage}
         />
-        <Text style={text.primaryText}>Welcome To Heartly</Text>
-        <Text style={text.primaryText}>Login to ur Account</Text>
+        <Text style={TextStyles.primaryText}>Welcome To Heartly</Text>
+        <Text style={TextStyles.primaryText}>Login to ur Account</Text>
 
         {/* <Input label="Email" onChangeText={(value)=>onChange({name:'email',value})} value={form.email } placeholder="user@example.com"
           error={errors.email}

@@ -4,5 +4,18 @@ export default StyleSheet.create({
         flex:1,
         justifyContent: 'center',
         alignItems: 'center',
-    }
+    },
+    infoBoxWrapper: {
+        borderBottomColor: '#dddddd',
+        borderBottomWidth: 1,
+        borderTopColor: '#dddddd',
+        borderTopWidth: 1,
+        flexDirection: 'row',
+        height: 100,
+      },
+      infoBox: {
+        width: '50%',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
 });

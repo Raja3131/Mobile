@@ -6,7 +6,6 @@ import Container from '../common/container/Container'
 import ProfileStyles from './ProfileStyles'
 import CustomButton from '../common/CustomButton/CustomButton'
 
-
 const ProfileComponent = () => {
     const {navigate} = useNavigation()
     const {
@@ -20,26 +19,42 @@ const ProfileComponent = () => {
      <View style={ProfileStyles.profileContainer}>
             <Text>Profile</Text>
             <Text>{data['user'].firstName.toUpperCase()}</Text>
-            <Text>{data['user'].mobile}</Text>
-            <Text>{data['user']._id}</Text>
 
 
-            <Pressable
-            onPress={() => navigate('ChangePassword')}
-            >
-                   <Text style={{}}> Change Password</Text>
-            </Pressable>
+            
         </View>
         <View>
-          <CustomButton
+         
+ <View style={ProfileStyles.infoBoxWrapper}>
+          <View style={[ProfileStyles.infoBox, {
+            borderRightColor: '#dddddd',
+            borderRightWidth: 1
+          }]}>
+            <Text>Mobile</Text>
+
+            <Text>{data['user'].mobile}</Text>
+          </View>
+          <View style={ProfileStyles.infoBox}>
+            <Text>Email</Text>
+            <Text>{data['user'].email}</Text>
+
+          </View>
+      </View>
+        </View>
+        <CustomButton
           primary
           title="Edit"
           onPress={()=>{
             navigate("EditProfile")
           }}
           />
-
-        </View>
+        <CustomButton
+            onPress={() => navigate('ChangePassword')}
+            primary
+            title="Change Password"
+            >
+                   
+            </CustomButton>
         </Container>
     </>
   )

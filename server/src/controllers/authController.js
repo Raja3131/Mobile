@@ -137,8 +137,36 @@ if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No User w
   const updatedAuth = {firstName,lastName,email,mobile,_id:id}
   await User.findByIdAndUpdate(id,updatedAuth,{new:true}) 
   res.status(200).json({
-    updateAuth
+    data:updatedAuth,
   })
+} catch (error) {
+  res.status(400).json({
+    error:error
+  })
+}
+}
+
+export const changePassword = async(req, res) => {
+  const {id} =req.params
+  const {password,newPassword,confirmNewPassword} = req.body
+try {
+  const user = await User.findOne({ id });
+  // const isMatch = await user.comparePassword(password);
+  if (!password===user.password) {
+    return res.json({
+      status: 400,
+      success: false,
+      message: "Incorrect Old Password",
+    });
+  }
+  const newerPassword = {password: newPassword,confirmPassword:newPassword,_id:id};
+  await User.findByIdAndUpdate(id, newerPassword,{new:true});
+
+ res.status(200).json({
+    data:newerPassword,
+  })
+
+  
 } catch (error) {
   res.status(400).json({
     error:error

@@ -7,7 +7,7 @@ import {
   verticalScale,
 } from '../helpers/Metrics';
 
-const buttons = StyleSheet.create({
+const ButtonStyles = StyleSheet.create({
   primary: {
     flex: 1,
     height: verticalScale(40),
@@ -15,9 +15,10 @@ const buttons = StyleSheet.create({
     marginRight: 20,
     paddingHorizontal: 5,
     marginVertical: 5,
-    borderRadius: 4,
+    borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'space-evenly',
+    backgroundColor:appColors.Blue,
   },
   small: {
     flex: 1,
@@ -29,10 +30,12 @@ const buttons = StyleSheet.create({
     borderRadius: 4,
     alignItems: 'center',
     justifyContent: 'space-evenly',
+    backgroundColor:appColors.Blue,
+
   },
 });
 
-const text = StyleSheet.create({
+const TextStyles = StyleSheet.create({
   primaryText: {
     fontSize: 22,
     textAlign: 'center',
@@ -52,4 +55,4 @@ const text = StyleSheet.create({
   },
 });
 
-export {buttons, text};
+export {ButtonStyles, TextStyles};
