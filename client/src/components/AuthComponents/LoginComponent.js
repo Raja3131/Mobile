@@ -59,7 +59,7 @@ const LoginComponent = ({onSubmit,onChange,form,justSignedUp,error,loading,isLog
         </TouchableOpacity>} iconPosition="right"
          />
         <CustomButton title="Login" loading={loading} disabled={errors.password||errors.mobile||!(form.mobile&&form.password)?true:false} primary onPress={onSubmit}/>
-        <CustomButton title="Clear" disabled={!(form.mobile||form.password)} primary onPress={onClear}/>
+        <CustomButton title="Clear" disabled={!(form.mobile||form.password)} primary onPress={onClear} />
 
         {error && !error.error && (
             <Message

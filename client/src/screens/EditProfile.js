@@ -9,24 +9,21 @@ import Container from '../components/common/container/Container';
 import {buttons} from '../styles/Global';
 import formValidators from '../utils/formValidator';
 import styles from '../components/AuthComponents/RegisterStyles';
-const EditProfile = () => {
+const EditProfile = ({route}) => {
   const [errors, setErrors] = useState({});
-
   const [editable, setEditable] = useState(false);
-  const {
-    authDispatch,
-    authState: {error, loading, data},
-  } = useContext(GlobalContext);
-  const emailCheck =
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const { authDispatch,authState: {error, loading, data}, } = useContext(GlobalContext);
+  const emailCheck = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const mobileCheck = /^[1-9]\d{9}$/;
+  const {firstName} = route.params
   const [form, setForm] = useState({
-    firstName: data['user'].firstName,
+    firstName: firstName,
     lastName: data['user'].lastName,
     email: data['user'].email,
     mobile: data['user'].mobile,
     city: data['user'].city,
   });
+  
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
     if (value !== '') {
@@ -177,7 +174,7 @@ const EditProfile = () => {
               : false
           }
           title="Save"
-          onPress={()=>onSubmit(data['user']._id)}
+          onPress={() => onSubmit(data['user']._id)}
           primary
         />
         <CustomButton

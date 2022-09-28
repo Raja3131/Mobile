@@ -10,8 +10,15 @@ export default StyleSheet.create({
       },
       linkBtn: {
         paddingLeft: 17,
-        color: appColors.Blue,
+        color: appColors.white,
         fontSize: 16,
+        backgroundColor: appColors.Blue,
+        borderRadius: 10,
+        textAlign: 'center',
+        padding:5,
+        elevation:20,
+        shadowOffset: 0,
+        textShadowRadius: 0
       },
     
       infoText: {
@@ -21,7 +28,7 @@ export default StyleSheet.create({
       },
       createSection:{
         alignItems:'center',
-        backgroundColor:'black'
+        // backgroundColor:'black'
       },
       errorMsg:{
         color:'red'

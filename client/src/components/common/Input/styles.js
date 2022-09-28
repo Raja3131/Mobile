@@ -12,7 +12,7 @@ export default StyleSheet.create({
       },
       wrapper: {
         height: 40,
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 4,
         paddingHorizontal: 5,
     

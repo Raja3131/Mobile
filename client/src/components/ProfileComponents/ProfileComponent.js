@@ -6,6 +6,7 @@ import Container from '../common/container/Container'
 import ProfileStyles from './ProfileStyles'
 import CustomButton from '../common/CustomButton/CustomButton'
 
+
 const ProfileComponent = () => {
     const {navigate} = useNavigation()
     const {
@@ -45,7 +46,7 @@ const ProfileComponent = () => {
           primary
           title="Edit"
           onPress={()=>{
-            navigate("EditProfile")
+            navigate("EditProfile",{firstName:data['user'].firstName})
           }}
           />
         <CustomButton
