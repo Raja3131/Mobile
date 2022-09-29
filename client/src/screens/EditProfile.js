@@ -9,15 +9,17 @@ import Container from '../components/common/container/Container';
 import {buttons} from '../styles/Global';
 import formValidators from '../utils/formValidator';
 import styles from '../components/AuthComponents/RegisterStyles';
+import editUser from '../context/actions/editUser';
+import { useNavigation } from '@react-navigation/native';
 const EditProfile = ({route}) => {
   const [errors, setErrors] = useState({});
   const [editable, setEditable] = useState(false);
   const { authDispatch,authState: {error, loading, data}, } = useContext(GlobalContext);
   const emailCheck = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const mobileCheck = /^[1-9]\d{9}$/;
-  const {firstName} = route.params
+  const {navigate} = useNavigation();
   const [form, setForm] = useState({
-    firstName: firstName,
+    firstName: data['user'].firstName,
     lastName: data['user'].lastName,
     email: data['user'].email,
     mobile: data['user'].mobile,
@@ -107,22 +109,8 @@ const EditProfile = ({route}) => {
   };
 
   const onSubmit = id => {
-    axiosInstance
-      .post(`/update-auth/${id}`, {
-        firstName: form.firstName,
-        lastName: form.lastName,
-        mobile: form.mobile,
-        email: form.email,
-        city: form.city,
-      })
-      .then(res => {
-        console.log(res);
-        if (res.status === 200) {
-          Alert.alert('successful');
-        } else {
-          Alert.alert('Error');
-        }
-      });
+   editUser(form,id)(authDispatch);
+   navigate("Profile")
   };
 
   return (

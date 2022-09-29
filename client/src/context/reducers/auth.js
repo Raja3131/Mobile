@@ -41,6 +41,23 @@ const auth = (state, {type, payload}) => {
         data: null,
         error: null,
       };
+      case ACTION_TYPES.EDIT_LOADING:
+        return {
+          ...state,
+          loading: true,
+        };
+      case ACTION_TYPES.EDIT_SUCCESS:
+        return {
+          ...state,
+          loading: true,
+          data: payload,
+        };
+      case ACTION_TYPES.EDIT_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: payload,
+        };
   }
 };
 export default auth;

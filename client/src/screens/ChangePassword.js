@@ -18,7 +18,22 @@ const ChangePassword = () => {
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
     if (value !== '') {
-     if (name === 'password' || name === 'confirmNewPassword' || name==='newPassword') {
+      console.log(value)
+    
+      if (name === 'newPassword') {
+        console.log(value)
+        if (value === form.password) {
+          console.log(value, form.password);
+          setErrors(prev => {
+            return {...prev, [name]: 'Password should not be same'};
+          });
+        } else {
+          setErrors(prev => {
+            return {...prev, [name]: null};
+          });
+        }
+      } 
+      else if (name === 'password' || name === 'newPassword' || name === 'confirmNewPassword') {
         if (value.length < 8) {
           setErrors(prev => {
             return {...prev, [name]: 'This field needs min 8 characters'};
@@ -28,12 +43,7 @@ const ChangePassword = () => {
             return {...prev, [name]: null};
           });
         }
-      } else {
-        setErrors(prev => {
-          return {...prev, [name]: null};
-        });
-      }
-
+      } 
     } 
     else {
       setErrors(prev => {
@@ -108,8 +118,20 @@ const ChangePassword = () => {
           onPress={() => {
             onSubmit(data['user']._id);
           }}
+          disabled={
+            errors.password ||
+            errors.newPassword &&
+            errors.confirmNewPassword ||
+            !(
+              form.newPassword &&
+              form.password &&
+              form.confirmNewPassword
+            )
+              ? true
+              : false
+          }
         />
-        <CustomButton title="Clear" primary onPress={onClear} />
+        <CustomButton title="Clear" primary onPress={onClear} disabled={!(form.mobile||form.password)}  />
       </Container>
     </>
   );

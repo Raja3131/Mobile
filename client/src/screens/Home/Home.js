@@ -25,7 +25,7 @@ export const Home = () => {
       
        }
        <View style={styles.Headers}>
-       <Text style={[TextStyles.primaryText,{color:'white'}]}>Welcome To Heartly</Text>
+       <Text style={[TextStyles.primaryText,{color:'black'}]}>Welcome To Heartly</Text>
        <Text style={[TextStyles.secondaryText,{color:'white'}]}>Hi {data['user'].firstName.toUpperCase()}</Text>
        </View>
       

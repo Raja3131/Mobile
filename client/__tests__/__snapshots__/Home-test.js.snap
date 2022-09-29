@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#0190db",
+        "borderRadius": 8,
+        "elevation": 10,
+        "margin": 5,
+        "padding": 20,
+        "shadowColor": "#333333",
+        "shadowOffset": Object {
+          "height": 10,
+          "width": 10,
+        },
+        "shadowOpacity": 0.4,
+        "shadowRadius": 2,
+        "textShadowRadius": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "fontSize": 22,
+            "fontWeight": "500",
+            "padding": 10,
+            "textAlign": "center",
+          },
+          Object {
+            "color": "black",
+          },
+        ]
+      }
+    >
+      Welcome To Heartly
+    </Text>
+  </View>
+</View>
+`;

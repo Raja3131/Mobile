@@ -72,7 +72,7 @@ export const Login = async (req, res) => {
         message: "Incorrect Password",
       });
     }
-    const token = jwt.sign({ userId: user._id },'raja', {
+    const token = jwt.sign({ userId: user._id }, "raja", {
       expiresIn: "1h",
     });
 
@@ -91,7 +91,9 @@ export const Login = async (req, res) => {
       tokens: [...oldTokens, { token, signedAt: Date.now().toString() }],
     });
 
-    return res.status(200).json({ status:200,success: true, user: user, token });
+    return res
+      .status(200)
+      .json({ status: 200, success: true, user: user, token });
   } catch (error) {
     return res.status(400).json({
       status: 400,
@@ -119,57 +121,56 @@ export const LogOut = async (req, res) => {
       res.json({ success: true, message: "Sign out successfully!" });
     }
   } catch (error) {
-    return res
-      .status(401)
-      .json({
-        success: false,
-        message: "Authorization fail!",
-        error: error.message,
-      });
+    return res.status(401).json({
+      success: false,
+      message: "Authorization fail!",
+      error: error.message,
+    });
   }
 };
 
-export const updateAuth = async(req,res,next) =>{
-const {id} = req.params
-const {firstName,lastName,email,mobile} = req.body
-try {
-if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No User with id: ${id}`);
-  const updatedAuth = {firstName,lastName,email,mobile,_id:id}
-  await User.findByIdAndUpdate(id,updatedAuth,{new:true}) 
-  res.status(200).json({
-    data:updatedAuth,
-  })
-} catch (error) {
-  res.status(400).json({
-    error:error
-  })
-}
-}
-
-export const changePassword = async(req, res) => {
-  const {id} =req.params
-  const {password,newPassword,confirmNewPassword} = req.body
-try {
-  const user = await User.findOne({ id });
-  // const isMatch = await user.comparePassword(password);
-  if (!password===user.password) {
-    return res.json({
-      status: 400,
-      success: false,
-      message: "Incorrect Old Password",
+export const updateAuth = async (req, res, next) => {
+  const { id } = req.params;
+  const { firstName, lastName, email, mobile } = req.body;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id))
+      return res.status(404).send(`No User with id: ${id}`);
+    const updatedAuth = { firstName, lastName, email, mobile, _id: id };
+    await User.findByIdAndUpdate(id, updatedAuth, { new: true });
+    res.status(200).json({ status: 200, success: true, user: updatedAuth });
+  } catch (error) {
+    res.status(400).json({
+      error: error,
     });
   }
-  const newerPassword = {password: newPassword,confirmPassword:newPassword,_id:id};
-  await User.findByIdAndUpdate(id, newerPassword,{new:true});
+};
 
- res.status(200).json({
-    data:newerPassword,
-  })
+export const changePassword = async (req, res) => {
+  const { id } = req.params;
+  const { password, newPassword, confirmNewPassword } = req.body;
+  try {
+    const user = await User.findOne({ id });
+    // const isMatch = await user.comparePassword(password);
+    if (!password === user.password) {
+      return res.json({
+        status: 400,
+        success: false,
+        message: "Incorrect Old Password",
+      });
+    }
+    const newerPassword = {
+      password: newPassword,
+      confirmPassword: newPassword,
+      _id: id,
+    };
+    await User.findByIdAndUpdate(id, newerPassword, { new: true });
 
-  
-} catch (error) {
-  res.status(400).json({
-    error:error
-  })
-}
-}
+    res.status(200).json({
+      data: newerPassword,
+    });
+  } catch (error) {
+    res.status(400).json({
+      error: error,
+    });
+  }
+};
