@@ -154,6 +154,21 @@ userSchema.statics.isThisMobileInUse = async function (mobile) {
     return false;
   }
 };
+userSchema.statics.isThisPatientInUse = async function (patient) {
+  if (!patient) throw new Error('Invalid mobile');
+  try {
+    const user = await this.findOne({appointment:  { $elemMatch: { patientName: patient }}})
+    if (user) return false;
+
+    return true;
+  } catch (error) {
+    console.log('error inside isThisMobileInUse method', error.message);
+    return false;
+  }
+};
+
+
+
 
 userSchema.methods.getResetPasswordToken = function () {
   const resetToken = crypto.randomBytes(20).toString("hex");
