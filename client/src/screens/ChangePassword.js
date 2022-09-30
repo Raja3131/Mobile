@@ -5,7 +5,6 @@ import axiosInstance from './../helpers/axiosInstance';
 import Container from '../components/common/container/Container';
 import Input from '../components/common/Input/Input';
 import CustomButton from '../components/common/CustomButton/CustomButton';
-import {info} from 'console';
 
 const ChangePassword = () => {
   const [errors, setErrors] = useState({});
@@ -18,56 +17,83 @@ const ChangePassword = () => {
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
     if (value !== '') {
-      console.log(value)
-    
-      if (name === 'newPassword') {
-        console.log(value)
-        if (value === form.password) {
-          console.log(value, form.password);
+
+      if (name === 'password') {
+        if (value !== data['user'].password) {
+
           setErrors(prev => {
-            return {...prev, [name]: 'Password should not be same'};
+            return {...prev, [name]: 'Incorrect Password'};
           });
         } else {
           setErrors(prev => {
             return {...prev, [name]: null};
           });
         }
-      } 
-      else if (name === 'password' || name === 'newPassword' || name === 'confirmNewPassword') {
+      } else if (
+        name === 'password' ||
+        name === 'newPassword' ||
+        name === 'confirmNewPassword'
+      ) {
+        console.log(value);
         if (value.length < 8) {
           setErrors(prev => {
             return {...prev, [name]: 'This field needs min 8 characters'};
           });
+        } else if (name === 'confirmNewPassword') {
+          if (value !== form.newPassword) {
+            console.log(value, form.newPassword);
+            setErrors(prev => {
+              return {...prev, [name]: 'Password not match'};
+            });
+          } else {
+            setErrors(prev => {
+              return {...prev, [name]: null};
+            });
+          }
+        } else if (name === 'newPassword') {
+          if (value === form.password) {
+            console.log(value, form.newPassword);
+            setErrors(prev => {
+              return {...prev, [name]: ' New Password should not be same '};
+            });
+          } else {
+            setErrors(prev => {
+              return {...prev, [name]: null};
+            });
+          }
         } else {
           setErrors(prev => {
             return {...prev, [name]: null};
           });
         }
-      } 
-    } 
-    else {
+      } else {
+        setErrors(prev => {
+          return {...prev, [name]: null};
+        });
+      }
+    } else {
       setErrors(prev => {
         return {...prev, [name]: 'This field is required'};
       });
     }
   };
-  const onSubmit = (id) =>{
-    axiosInstance.post(`/change-password/${id}`, {
-      password: form.password,
-      newPassword: form.newPassword,
-    }).then(res => {
-      console.log(res.status);
-      if (res.status === 200) {
-        Alert.alert(' successful');
-      }
-      
-      else {
-        Alert.alert('Failed');
-      }
-      console.log(res.data);
-
-    }).catch(err=>console.log(err));
-  } 
+  const onSubmit = id => {
+    axiosInstance
+      .post(`/change-password/${id}`, {
+        password: form.password,
+        newPassword: form.newPassword,
+      })
+      .then(res => {
+        console.log(res.status);
+        if (res.status === 200) {
+          Alert.alert(' successful');
+        } else {
+          Alert.alert('Failed');
+        }
+        console.log(res.data);
+      })
+      .catch(err => console.log(err));
+  };
 
   const onClear = () => {
     Alert.alert('Clear!', 'Are you sure you want to clear?', [
@@ -80,11 +106,9 @@ const ChangePassword = () => {
         text: 'OK',
         onPress: () => {
           setForm({
-          
             ['password']: '',
             ['newPassword']: '',
             ['confirmNewPassword']: '',
-
           });
         },
       },
@@ -99,7 +123,7 @@ const ChangePassword = () => {
           value={form.password}
           error={errors.password}
         />
-      
+
         <Input
           label="New Password"
           onChangeText={value => onChange({name: 'newPassword', value})}
@@ -120,18 +144,19 @@ const ChangePassword = () => {
           }}
           disabled={
             errors.password ||
-            errors.newPassword &&
+            errors.newPassword ||
             errors.confirmNewPassword ||
-            !(
-              form.newPassword &&
-              form.password &&
-              form.confirmNewPassword
-            )
+            !(form.newPassword && form.password && form.confirmNewPassword)
               ? true
               : false
           }
         />
-        <CustomButton title="Clear" primary onPress={onClear} disabled={!(form.mobile||form.password)}  />
+        <CustomButton
+          title="Clear"
+          primary
+          onPress={onClear}
+          disabled={!(form.mobile || form.password)}
+        />
       </Container>
     </>
   );

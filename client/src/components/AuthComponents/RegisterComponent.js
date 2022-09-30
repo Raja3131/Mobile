@@ -87,7 +87,7 @@ const RegisterComponent = ({
           onChangeText={value => onChange({name: 'password', value})}
           value={form.password}
           error={errors.password}
-          secureTextEntry={true}
+          secureTextEntry={isSecureEntry}
           contextMenuHidden={true}
           maxLength={20}
           placeholder="Password"
@@ -113,7 +113,7 @@ const RegisterComponent = ({
           onChangeText={value => onChange({name: 'confirmPassword', value})}
           value={form.confirmPassword}
           error={errors.confirmPassword}
-          secureTextEntry={true}
+          secureTextEntry={isSecureEntry}
           contextMenuHidden={true}
           editable={editable}
           selectTextOnFocus={false}

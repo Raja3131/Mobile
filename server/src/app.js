@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import Validate from 'express-validator'
 import authRouter from './routes/authRoutes.js'
+import appointRouter from './routes/appointRoutes.js'
 const app = express()
 app.use(express.json())
 app.use(cors())
@@ -25,6 +26,7 @@ const connectDBandStartServer = async () => {
   };
   connectDBandStartServer();
   app.use('/',authRouter)
+  app.use('/',appointRouter);
   app.use(function(err, req, res, next) {
     // specific for validation errors
     if (err instanceof Validate.ValidationError)

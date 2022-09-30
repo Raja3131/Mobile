@@ -64,8 +64,8 @@ export const Login = async (req, res) => {
       });
     }
 
-    const isMatch = await user.comparePassword(password);
-    if (!isMatch) {
+    const isMatch =  user.password;
+    if (isMatch!==password) {
       return res.json({
         status: 400,
         success: false,
@@ -156,6 +156,13 @@ export const changePassword = async (req, res) => {
         status: 400,
         success: false,
         message: "Incorrect Old Password",
+      });
+    }
+    if(newPassword === password) {
+      return res.json({
+        status: 400,
+        success: false,
+        message: "New Password Should Not be same as old password",
       });
     }
     const newerPassword = {

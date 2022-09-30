@@ -2,6 +2,67 @@ import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
 
 const userSchema = new mongoose.Schema({
+  appointment: [{
+    patientName: {
+      type: String,
+    },
+    user:{type:mongoose.Types.ObjectId,ref:"User"},
+    email: {
+      type: String,
+      required: [true, "Please provide email address"],
+      unique: true,
+      match: [
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        "Please provide a valid email",
+      ],
+    },
+    mobile: {
+      type: String,
+      unique: [true, "Mobile number Already Exists"],
+      required: [true, "Please Provide Mobile Number"],
+    },
+    address: {
+      type: String,
+    },
+    district: {
+      type: String,
+    },
+    pincode: {
+      type: Number,
+    },
+    services: {
+      type: String,
+    },
+    additionalServices: {
+      type: String,
+    },
+    timeToCall: {
+      type: Date,
+    },
+    date: {
+      type: Date,
+    },
+    time: {
+      type: Date,
+    },
+    isConfirmed: {
+      type: Boolean,
+      default: false,
+    },
+    isCancelled: {
+      type: Boolean,
+      default: false
+    },
+    isClosed: {
+      type: Boolean,
+      default: false
+    },
+    isOpen: {
+      type: Boolean,
+      default: false
+  
+    }
+  }],
   firstName: {
     type: String,
   },
@@ -34,6 +95,8 @@ const userSchema = new mongoose.Schema({
   newPassword: {
     type:String,
   },
+  resetPasswordToken: String,
+  resetPasswordExpire: Date,
   
   tokens: [{ type: Object }],
   
@@ -54,17 +117,17 @@ const userSchema = new mongoose.Schema({
 // }
  
 // });
-userSchema.methods.comparePassword = async function (password) {
-  if (!password) throw new Error('Password is mission, can not compare!');
+// userSchema.methods.comparePassword = async function (password) {
+//   if (!password) throw new Error('Password is mission, can not compare!');
 
-  try {
-    const result = await password===this.password
+//   try {
+//     const result = await password===this.password
     
-    return result;
-  } catch (error) {
-    console.log('Error while comparing password!', error.message);
-  }
-};
+//     return result;
+//   } catch (error) {
+//     console.log('Error while comparing password!', error.message);
+//   }
+// };
 
 
 userSchema.statics.isThisEmailInUse = async function (email) {
@@ -87,7 +150,7 @@ userSchema.statics.isThisMobileInUse = async function (mobile) {
 
     return true;
   } catch (error) {
-    console.log('error inside isThisEmailInUse method', error.message);
+    console.log('error inside isThisMobileInUse method', error.message);
     return false;
   }
 };
