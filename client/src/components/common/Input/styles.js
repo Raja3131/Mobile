@@ -8,7 +8,7 @@ export default StyleSheet.create({
     textInput: {
         flex: 1,
         width: '100%',
-        color:'black'
+        color:appColors.Blue  
       },
       wrapper: {
         height: 40,

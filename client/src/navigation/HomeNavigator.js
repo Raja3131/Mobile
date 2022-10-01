@@ -5,6 +5,7 @@ import { View,Text } from 'react-native-animatable';
 import { Home } from '../screens/Home/Home';
 import ChangePassword from '../screens/ChangePassword';
 import EditProfile from '../screens/EditProfile';
+import Appointment from '../screens/Appointment/Appointment';
 
 
 const HomeNavigator = () => {
@@ -34,6 +35,21 @@ const HomeNavigator = () => {
         <Stack.Screen
           name="EditProfile"
           component={EditProfile}
+
+          options={({route}) => ({
+            title: route.params?.title,
+            headerBackVisible:true,
+            header: () => null,
+            headerShown: false
+          })}
+          screenOptions={{
+            headerShown: false,
+          }}
+          
+        />
+        <Stack.Screen
+          name="Appointment"
+          component={Appointment}
 
           options={({route}) => ({
             title: route.params?.title,

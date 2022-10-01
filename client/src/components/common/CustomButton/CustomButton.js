@@ -17,11 +17,15 @@ const CustomButton = ({
   primary,
   onPress,
   style,
+  picker,
   ...props
 }) => {
   const getBgColor = () => {
     if (primary) {
       return appColors.Blue;
+    }
+    if(picker){
+      return appColors.grey;
     }
   };
   return (
