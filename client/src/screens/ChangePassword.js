@@ -1,14 +1,18 @@
-import {View, Text, Alert} from 'react-native';
+import {View, Text, Alert, TouchableOpacity} from 'react-native';
 import React, {useContext, useState} from 'react';
 import {GlobalContext} from '../context/Provider';
 import axiosInstance from './../helpers/axiosInstance';
 import Container from '../components/common/container/Container';
 import Input from '../components/common/Input/Input';
 import CustomButton from '../components/common/CustomButton/CustomButton';
+import Icon from '../components/common/Icon/Icon';
+import appColors from '../styles/appColors';
 
 const ChangePassword = () => {
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState({});
+  const [isSecureEntry, setIsSecureEntry] = useState(true);
+
   const {
     authDispatch,
     authState: {error, loading, data},
@@ -17,10 +21,8 @@ const ChangePassword = () => {
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
     if (value !== '') {
-
       if (name === 'password') {
         if (value !== data['user'].password) {
-
           setErrors(prev => {
             return {...prev, [name]: 'Incorrect Password'};
           });
@@ -122,6 +124,32 @@ const ChangePassword = () => {
           onChangeText={value => onChange({name: 'password', value})}
           value={form.password}
           error={errors.password}
+          secureTextEntry={isSecureEntry}
+          icon={
+            <TouchableOpacity
+              onPress={() => {
+                setIsSecureEntry(prev => !prev);
+              }}>
+              <Text>
+                {isSecureEntry ? (
+                  <Icon
+                    size={21}
+                    name="eye-off"
+                    type="feather"
+                    color={appColors.Blue}
+                  />
+                ) : (
+                  <Icon
+                    size={21}
+                    name="eye"
+                    type="feather"
+                    color={appColors.Blue}
+                  />
+                )}
+              </Text>
+            </TouchableOpacity>
+          }
+          iconPosition="right"
         />
 
         <Input
@@ -129,12 +157,64 @@ const ChangePassword = () => {
           onChangeText={value => onChange({name: 'newPassword', value})}
           value={form.newPassword}
           error={errors.newPassword}
+          secureTextEntry={isSecureEntry}
+          icon={
+            <TouchableOpacity
+              onPress={() => {
+                setIsSecureEntry(prev => !prev);
+              }}>
+              <Text>
+                {isSecureEntry ? (
+                  <Icon
+                    size={21}
+                    name="eye-off"
+                    type="feather"
+                    color={appColors.Blue}
+                  />
+                ) : (
+                  <Icon
+                    size={21}
+                    name="eye"
+                    type="feather"
+                    color={appColors.Blue}
+                  />
+                )}
+              </Text>
+            </TouchableOpacity>
+          }
+          iconPosition="right"
         />
         <Input
           label="Confirm New Password"
           onChangeText={value => onChange({name: 'confirmNewPassword', value})}
           value={form.ConfirmNewPassword}
           error={errors.confirmNewPassword}
+          secureTextEntry={isSecureEntry}
+          icon={
+            <TouchableOpacity
+              onPress={() => {
+                setIsSecureEntry(prev => !prev);
+              }}>
+              <Text>
+                {isSecureEntry ? (
+                  <Icon
+                    size={21}
+                    name="eye-off"
+                    type="feather"
+                    color={appColors.Blue}
+                  />
+                ) : (
+                  <Icon
+                    size={21}
+                    name="eye"
+                    type="feather"
+                    color={appColors.Blue}
+                  />
+                )}
+              </Text>
+            </TouchableOpacity>
+          }
+          iconPosition="right"
         />
         <CustomButton
           title="Confirm"
