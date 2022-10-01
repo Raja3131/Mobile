@@ -63,6 +63,7 @@ const userSchema = new mongoose.Schema({
   
     }
   }],
+
   firstName: {
     type: String,
   },
@@ -95,8 +96,12 @@ const userSchema = new mongoose.Schema({
   newPassword: {
     type:String,
   },
-  resetPasswordToken: String,
-  resetPasswordExpire: Date,
+  resetPasswordToken:  {
+    type:String,
+  },
+  resetPasswordExpire:  {
+    type:Date,
+  },
   
   tokens: [{ type: Object }],
   

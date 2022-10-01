@@ -1,4 +1,4 @@
-import {useContext, useEffect} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {View, Text, Pressable, Button} from 'react-native';
 import {GlobalContext} from '../../context/Provider';
 import styles from './styles';
@@ -27,7 +27,7 @@ export const Home = () => {
 
   const showMode = (currentMode) => {
     if (Platform.OS === 'android') {
-      setShow(false);
+      setShow(true);
       // for iOS, add a button that closes the picker
     }
     setMode(currentMode);
