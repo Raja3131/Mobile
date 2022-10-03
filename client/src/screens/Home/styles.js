@@ -24,6 +24,13 @@ export default StyleSheet.create({
   },
   appointmentContainer:{
     flex:3,
+    
+  },
+  itemContainer:{
+    backgroundColor: appColors.Blue,
+    height: 30,
+    width: 30,
+
   },
   iconContainer: {
     flex: 1,

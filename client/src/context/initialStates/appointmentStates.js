@@ -1,6 +1,18 @@
 export default {
-    // isLoggedIn: false,
-    data: null,
-    error: null,
-    loading: false,
-  };
+  getAppointments: {
+    AppointData: [],
+    AppointError: null,
+    AppointLoading: false,
+  },
+  createAppointment: {
+    AppointData: {},
+    AppointError: null,
+    AppointLoading: false,
+  },
+
+  deleteAppointment: {
+    AppointData: {},
+    AppointError: null,
+    AppointLoading: false,
+  },
+};

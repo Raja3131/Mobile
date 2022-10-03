@@ -17,7 +17,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Icon from './common/Icon/Icon';
 import appColors from '../styles/appColors';
 import { GlobalContext } from '../context/Provider';
-import logoutUser from '../context/actions/logoutUser';
+import logoutUser from '../context/actions/AuthUser/logoutUser';
 
 const CustomDrawer = props => {
     const {

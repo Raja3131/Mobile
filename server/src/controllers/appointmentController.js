@@ -1,11 +1,17 @@
+import { response } from "express";
 import Appointment from "../models/appointmentModel.js";
 import User from "./../models/userModel.js";
 
 export const getAppointment = async (req, res) => {
-  const { id } = req.body;
-  const Appointments = await User.findOne({ id })
-    .populate("appointment")
-    .then((appointment) => res.json(appointment));
+  const { id } = req.params;
+  console.log(id)
+ try {
+  const Appointments= await User.findById(id).populate("appointment")
+  .then((appointment) => res.json(appointment.appointment));
+  
+ } catch (error) {
+  res.json(error);
+ }
 };
 
 export const createAppointment = async (req, res) => {

@@ -7,6 +7,9 @@ import appColors from '../../styles/appColors';
 import Icon from '../../components/common/Icon/Icon';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import DateTimePicker from '../../components/common/DateTimePicker/DateTimePicker';
+import getAppointments from '../../context/actions/appointments/getAppointments';
+import logoutUser from '../../context/actions/AuthUser/logoutUser';
+import Message from '../../components/common/Message/Message';
 
 export const Home = () => {
   const {navigate} = useNavigation();
@@ -17,12 +20,39 @@ export const Home = () => {
   const onLogOut = () => {
     logoutUser()(authDispatch);
   };
-  const [appointments, setAppointments] = useState(data['user'].appointment);
+
+  const {
+    appointmentDispatch,
+    appointmentState: {
+      getAppointments: {AppointData, AppointLoading, AppointError},
+    },
+  } = useContext(GlobalContext);
+
   useFocusEffect(
     useCallback(() => {
-      console.log(appointments);
+      console.log(data['user'].firstName);
+      getAppointments(data['user']._id)(appointmentDispatch);
     }, []),
   );
+
+  const renderAppointments = ()=>{
+    if(AppointData.length===0){
+      return(
+        <>
+        <Message message="No Appointments" primary />
+        </>
+      )
+    }
+    return (<>
+            <View style={styles.appointmentContainer}>
+          {AppointData.map(appointment => (
+            <>  
+                <Text>{appointment.patientName}</Text>
+            </>
+          ))}
+        </View>
+    </>)
+  }
   return (
     <>
       <View style={styles.homeContainer}>
@@ -35,14 +65,9 @@ export const Home = () => {
             Hi {data['user'].firstName.toUpperCase()}
           </Text>
         </View>
-
-        <View style={styles.appointmentContainer}>
-          {appointments.map(appointment => (
-            <>
-              <Text>{appointment.patientName}</Text>
-            </>
-          ))}
-        </View>
+        
+      {renderAppointments()}
+      
         <View style={styles.iconContainer}>
           <Pressable
             style={styles.plusIconButton}

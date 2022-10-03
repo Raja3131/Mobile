@@ -1,155 +1,155 @@
 import { ACTION_TYPES } from "../../constants/actionTypes";
 const appointments = (state, {type, payload}) => {
     switch (type) {
-      case EDIT_CONTACT_LOADING: {
+      case ACTION_TYPES.EDIT_APPOINTMENT_LOADING: {
         return {
           ...state,
-          createContact: {
-            ...state.createContact,
-            loading: true,
-            error: null,
+          createAppointment: {
+            ...state.createAppointment,
+            AppointLoading: true,
+            AppointError: null,
           },
         };
       }
   
-      case EDIT_CONTACT_SUCCESS: {
+      case ACTION_TYPES.EDIT_APPOINTMENT_SUCCESS: {
         return {
           ...state,
-          createContact: {
-            ...state.createContact,
+          createAppointment: {
+            ...state.createAppointment,
             loading: false,
             error: null,
           },
   
-          getContacts: {
-            ...state.getContacts,
-            loading: false,
-            data: state.getContacts.data.map((item) => {
+          getAppointments: {
+            ...state.getAppointments,
+            AppointLoading: false,
+            AppointData: state.getAppointments.data.map((item) => {
               if (item.id === payload.id) {
                 return payload;
               } else {
                 return item;
               }
             }),
-            error: null,
+            AppointError: null,
           },
         };
       }
   
-      case EDIT_CONTACT_FAIL: {
+      case ACTION_TYPES.EDIT_APPOINTMENT_FAIL: {
         return {
           ...state,
           createContact: {
-            ...state.createContact,
-            loading: false,
-            error: null,
+            ...state.createAppointment,
+            AppointLoading: false,
+            AppointError: null,
           },
         };
       }
   
-      case DELETE_CONTACT_LOADING: {
+      case ACTION_TYPES.DELETE_APPOINTMENT_LOADING: {
+        return {
+          ...state,
+          deleteAppointment: {
+            ...state.deleteAppointment,
+            AppointLoading: true,
+            AppointError: null,
+          },
+        };
+      }
+  
+      case ACTION_TYPES.DELETE_APPOINTMENT_SUCCESS: {
         return {
           ...state,
           deleteContact: {
-            ...state.deleteContact,
-            loading: true,
-            error: null,
+            ...state.deleteAppointment,
+            AppointLoading: false,
+            AppointError: null,
+          },
+  
+          getContacts: {
+            ...state.getAppointments,
+            AppointLoading: false,
+            AppointData: state.getAppointments.data.filter((item) => item.id !== payload),
+            AppointError: null,
           },
         };
       }
   
-      case DELETE_CONTACT_SUCCESS: {
+      case ACTION_TYPES.CREATE_APPOINTMENT_FAIL:
         return {
           ...state,
-          deleteContact: {
-            ...state.deleteContact,
-            loading: false,
-            error: null,
+          createContact: {
+            ...state.createAppointment,
+            AppointLoading: false,
+            AppointError: null,
+          },
+        };
+      case ACTION_TYPES.CREATE_APPOINTMENT_LOADING:
+        return {
+          ...state,
+          createContact: {
+            ...state.createAppointment,
+            AppointLoading: true,
+            AppointError: null,
+          },
+        };
+      case ACTION_TYPES.CREATE_APPOINTMENT_SUCCESS:
+        return {
+          ...state,
+          createContact: {
+            ...state.createAppointment,
+            AppointLoading: false,
+            AppointError: null,
+            AppointData: payload,
           },
   
           getContacts: {
-            ...state.getContacts,
-            loading: false,
-            data: state.getContacts.data.filter((item) => item.id !== payload),
-            error: null,
-          },
-        };
-      }
-  
-      case CREATE_CONTACT_FAIL:
-        return {
-          ...state,
-          createContact: {
-            ...state.createContact,
-            loading: false,
-            error: null,
-          },
-        };
-      case CREATE_CONTACT_LOADING:
-        return {
-          ...state,
-          createContact: {
-            ...state.createContact,
-            loading: true,
-            error: null,
-          },
-        };
-      case CREATE_CONTACT_SUCCESS:
-        return {
-          ...state,
-          createContact: {
-            ...state.createContact,
-            loading: false,
-            error: null,
-            data: payload,
-          },
-  
-          getContacts: {
-            ...state.getContacts,
-            loading: false,
-            data: [payload, ...state.getContacts.data],
-            error: null,
+            ...state.getAppointments,
+            AppointLoading: false,
+            AppointData: [payload, ...state.getAppointments.data],
+            AppointError: null,
           },
         };
   
-      case CREATE_CONTACT_FAIL:
+      case ACTION_TYPES.CREATE_APPOINTMENT_FAIL:
         return {
           ...state,
-          createContact: {
-            ...state.createContact,
-            loading: false,
-            error: payload,
+          createAppointment: {
+            ...state.createAppointment,
+            AppointLoading: false,
+            AppointError: payload,
           },
         };
   
       case ACTION_TYPES.GET_APPOINTMENTS_LOADING:
         return {
           ...state,
-          getContacts: {
-            ...state.getContacts,
-            loading: true,
-            error: null,
+          getAppointments: {
+            ...state.getAppointments,
+            AppointLoading: true,
+            AppointError: null,
           },
         };
   
       case ACTION_TYPES.GET_APPOINTMENTS_SUCCESS:
         return {
           ...state,
-          getContacts: {
-            ...state.getContacts,
-            loading: false,
-            data: payload,
-            error: null,
+          getAppointments: {
+            ...state.getAppointments,
+            AppointLoading: false,
+            AppointData: payload,
+            AppointError: null,
           },
         };
   
-      case ACTION_TYPES.GET_APPOINTMENTS_SUCCESS:
+      case ACTION_TYPES.GET_APPOINTMENTS_FAIL:
         return {
           ...state,
-          getContacts: {
-            ...state.getContacts,
-            loading: false,
-            error: payload,
+          getAppointments: {
+            ...state.getAppointments,
+            AppointLoading: false,
+            AppointError: payload,
           },
         };
   
@@ -158,4 +158,4 @@ const appointments = (state, {type, payload}) => {
     }
   };
   
-  export default contacts;
+  export default appointments;

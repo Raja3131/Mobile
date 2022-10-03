@@ -9,8 +9,8 @@ import Container from '../components/common/container/Container';
 import {buttons} from '../styles/Global';
 import formValidators from '../utils/formValidator';
 import styles from '../components/AuthComponents/RegisterStyles';
-import editUser from '../context/actions/editUser';
 import { useNavigation } from '@react-navigation/native';
+import editUser from '../context/actions/AuthUser/editUser';
 const EditProfile = ({route}) => {
   const [errors, setErrors] = useState({});
   const [editable, setEditable] = useState(false);

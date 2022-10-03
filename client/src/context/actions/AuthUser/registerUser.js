@@ -1,6 +1,6 @@
-import {ACTION_TYPES} from '../../constants/actionTypes';
-import { ROUTE_NAMES } from '../../constants/routeNames';
-import axiosInstance from '../../helpers/axiosInstance';
+import { ACTION_TYPES } from '../../../constants/actionTypes';
+import { ROUTE_NAMES } from '../../../constants/routeNames';
+import axiosInstance from '../../../helpers/axiosInstance';
 import {useNavigation} from '@react-navigation/native'
 export const clearAuthState = () => dispatch => {
   

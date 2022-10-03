@@ -6,18 +6,17 @@ import axiosInstance from "../../../helpers/axiosInstance";
 export default (form, id) =>
 async dispatch => {
   const requestPayload ={
-      firstName:form.firstName || '',
-      lastName:form.lastName || '',
+      patientName:form.patientName || '',
       email:form.email || '',
       mobile:form.mobile || '',
       city: form.city || '',
   }
   console.log('requestPayload :>> ', requestPayload);
   dispatch({
-    type: ACTION_TYPES.EDIT_LOADING,
+    type: ACTION_TYPES.REGISTER_LOADING,
   });
   try {
-    const res = await axiosInstance.post(`/update-auth/${id}`,requestPayload);
+    const res = await axiosInstance.post(`/appointment/${id}`,requestPayload);
     dispatch({
       type: ACTION_TYPES.REGISTER_SUCCESS,
       payload: res.data,

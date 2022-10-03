@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
-import {ACTION_TYPES} from './../../constants/actionTypes';
-import axiosInstance from './../../helpers/axiosInstance';
+import {ACTION_TYPES} from '../../../constants/actionTypes';
+import axiosInstance from '../../../helpers/axiosInstance';
 
 export default (form, id) =>
   async dispatch => {

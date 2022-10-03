@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react'
 import AppointmentComponent from '../../components/AppointmentComponent/AppointmentComponent'
 import { GlobalContext } from '../../context/Provider';
 import axiosInstance from '../../helpers/axiosInstance';
+import createAppointments from '../../context/actions/appointments/createAppointments';
 
 const Appointment = () => {
   const [errors, setErrors] = useState({});
@@ -52,35 +53,36 @@ const Appointment = () => {
     }
   };
   const onSubmit = (id) => {
-    axiosInstance
-    .post(`/appointment/${id}`, {
-      patientName: form.patientName,
-      address: form.address,
-      location: form.location,
-      mobile: form.mobile,
-      email: form.email,
-      // password: form.services,
-      confirmPassword: form.mobile,
-      confirmPassword: form.email,
-      // date: form.date,
-      // time: form.time,
-      // additionalServices:form.additionalServices
+    // axiosInstance
+    // .post(`/appointment/${id}`, {
+    //   patientName: form.patientName,
+    //   address: form.address,
+    //   location: form.location,
+    //   mobile: form.mobile,
+    //   email: form.email,
+    //   // password: form.services,
+    //   confirmPassword: form.mobile,
+    //   confirmPassword: form.email,
+    //   // date: form.date,
+    //   // time: form.time,
+    //   // additionalServices:form.additionalServices
 
-    })
-    .then(res => {
-      console.log(res.data);
-      if (res.data.status === 201) {
-        Alert.alert('Register successful');
+    // })
+    // .then(res => {
+    //   console.log(res.data);
+    //   if (res.data.status === 201) {
+    //     Alert.alert('Register successful');
 
-      }
-      // else if(res.data.status===400){
-      //   Alert.alert('Both password should be same');
+    //   }
+    //   // else if(res.data.status===400){
+    //   //   Alert.alert('Both password should be same');
 
-      // } 
-      else {
-        Alert.alert(res.data.message);
-      }
-    });
+    //   // } 
+    //   else {
+    //     Alert.alert(res.data.message);
+    //   }
+    // });
+    createAppointments(form,id)(authDispatch)
   }
   return (
    <>

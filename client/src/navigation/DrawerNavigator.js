@@ -3,7 +3,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { View, Text, Pressable } from 'react-native'
 import React,{useContext} from 'react'
 import { ROUTE_NAMES } from '../constants/routeNames';
-import logoutUser from '../context/actions/logoutUser';
+import logoutUser from '../context/actions/AuthUser/logoutUser';
 import { GlobalContext } from '../context/Provider';
 import CustomDrawer from '../components/CustomDrawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';

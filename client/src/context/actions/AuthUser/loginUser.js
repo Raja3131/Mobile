@@ -1,6 +1,6 @@
-import {ACTION_TYPES} from './../../constants/actionTypes';
-import axiosInstance from '../../helpers/axiosInstance';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axiosInstance from '../../../helpers/axiosInstance';
+import { ACTION_TYPES } from '../../../constants/actionTypes';
 import axios from 'axios';
 
 export default ({mobile:mobile, password: password}) =>

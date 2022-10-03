@@ -5,10 +5,11 @@ import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 import {useFocusEffect} from '@react-navigation/native';
 import {GlobalContext} from '../../context/Provider';
-import registerUser, {clearAuthState} from '../../context/actions/registerUser';
 import {ROUTE_NAMES} from '../../constants/routeNames';
 import {useEffect} from 'react';
 import axiosInstance from '../../helpers/axiosInstance';
+import registerUser from '../../context/actions/AuthUser/registerUser';
+import { clearAuthState } from './../../context/actions/AuthUser/registerUser';
 
 const Register = () => {
   const [errors, setErrors] = useState({});
