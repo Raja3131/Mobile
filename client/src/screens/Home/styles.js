@@ -22,15 +22,22 @@ export default StyleSheet.create({
     textShadowRadius: 10,
     elevation: 10,
   },
-  appointmentContainer:{
-    flex:3,
-    
-  },
+  
   itemContainer:{
-    backgroundColor: appColors.Blue,
-    height: 30,
-    width: 30,
+    backgroundColor: appColors.white,
+    height: 60,
+    width: '80%',
+    padding:10,
+    borderBottomColor:appColors.Black,
+    borderBottomWidth: 1,
+    margin:2
+    
+    
 
+  },
+  Appointment:{
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   iconContainer: {
     flex: 1,

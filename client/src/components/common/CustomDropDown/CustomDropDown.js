@@ -4,7 +4,7 @@ import {Dropdown} from 'react-native-element-dropdown';
 import styles from './styles';
 import Icon from '../Icon/Icon';
 
-const CustomDropDown = ({data}) => {
+const CustomDropDown = ({data, placeholder}) => {
   const [value, setValue] = useState(null);
 
   const renderItem = item => {
@@ -31,7 +31,7 @@ const CustomDropDown = ({data}) => {
           maxHeight={300}
           labelField="label"
           valueField="value"
-          placeholder="Select item"
+          placeholder={placeholder}
           searchPlaceholder="Search..."
           value={value}
           onChange={item => {

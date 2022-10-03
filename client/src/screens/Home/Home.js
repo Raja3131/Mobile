@@ -6,10 +6,11 @@ import {TextStyles} from '../../styles/Global';
 import appColors from '../../styles/appColors';
 import Icon from '../../components/common/Icon/Icon';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import DateTimePicker from '../../components/common/DateTimePicker/DateTimePicker';
+import DateTimePicker from '../../components/common/DatePicker/DatePicker';
 import getAppointments from '../../context/actions/appointments/getAppointments';
 import logoutUser from '../../context/actions/AuthUser/logoutUser';
 import Message from '../../components/common/Message/Message';
+import Container from '../../components/common/container/Container';
 
 export const Home = () => {
   const {navigate} = useNavigation();
@@ -43,18 +44,19 @@ export const Home = () => {
         </>
       )
     }
-    return (<>
-            <View style={styles.appointmentContainer}>
-          {AppointData.map(appointment => (
-            <>  
-                <Text>{appointment.patientName}</Text>
-            </>
-          ))}
-        </View>
-    </>)
+    return AppointData.reverse().map(appointment => (
+      <>
+      <View style={styles.Appointment}>
+        <View style={styles.itemContainer}>
+<Text>{appointment.patientName}</Text>
+      </View>
+      </View>
+      </>
+    ));
   }
   return (
     <>
+    <Container>
       <View style={styles.homeContainer}>
         {}
         <View style={styles.Headers}>
@@ -81,6 +83,7 @@ export const Home = () => {
           </Pressable>
         </View>
       </View>
+      </Container>
     </>
   );
 };
