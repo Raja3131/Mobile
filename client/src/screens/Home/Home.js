@@ -1,28 +1,31 @@
-import {useContext, useEffect, useState} from 'react';
+import {useCallback, useContext, useEffect, useState} from 'react';
 import {View, Text, Pressable, Button} from 'react-native';
 import {GlobalContext} from '../../context/Provider';
 import styles from './styles';
 import {TextStyles} from '../../styles/Global';
 import appColors from '../../styles/appColors';
 import Icon from '../../components/common/Icon/Icon';
-import { useNavigation } from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import DateTimePicker from '../../components/common/DateTimePicker/DateTimePicker';
 
 export const Home = () => {
-  const {navigate} = useNavigation()
+  const {navigate} = useNavigation();
   const {
     authDispatch,
     authState: {error, loading, isLoggedIn, data},
   } = useContext(GlobalContext);
-  console.log(data);
   const onLogOut = () => {
     logoutUser()(authDispatch);
   };
-
+  const [appointments, setAppointments] = useState(data['user'].appointment);
+  useFocusEffect(
+    useCallback(() => {
+      console.log(appointments);
+    }, []),
+  );
   return (
     <>
-      <View
-        style={styles.homeContainer}>
+      <View style={styles.homeContainer}>
         {}
         <View style={styles.Headers}>
           <Text style={[TextStyles.primaryText, {color: 'black'}]}>
@@ -33,11 +36,17 @@ export const Home = () => {
           </Text>
         </View>
 
-      <View style={styles.appointmentContainer}>
-
-      </View>
-      <View style={styles.iconContainer}>
-          <Pressable style={styles.plusIconButton} onPress={() => navigate('Appointment')}>
+        <View style={styles.appointmentContainer}>
+          {appointments.map(appointment => (
+            <>
+              <Text>{appointment.patientName}</Text>
+            </>
+          ))}
+        </View>
+        <View style={styles.iconContainer}>
+          <Pressable
+            style={styles.plusIconButton}
+            onPress={() => navigate('Appointment')}>
             <Icon
               size={40}
               name="plus-circle"
@@ -47,7 +56,6 @@ export const Home = () => {
           </Pressable>
         </View>
       </View>
-
     </>
   );
 };

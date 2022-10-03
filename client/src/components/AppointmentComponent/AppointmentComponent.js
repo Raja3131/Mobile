@@ -1,5 +1,5 @@
 import {View, Text} from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Input from '../common/Input/Input';
 import Container from '../common/container/Container';
 import CustomButton from '../common/CustomButton/CustomButton';
@@ -8,7 +8,13 @@ import Icon from '../common/Icon/Icon';
 import appColors from '../../styles/appColors';
 import CustomDropDown from '../common/CustomDropDown/CustomDropDown';
 import DateTimePicker from '../common/DateTimePicker/DateTimePicker';
-const AppointmentComponent = ({form,errors,onChange}) => {
+import { GlobalContext } from '../../context/Provider';
+const AppointmentComponent = ({form,errors,onChange,onSubmit}) => {
+  const {
+    authDispatch,
+    authState: {error, loading, isLoggedIn, data},
+  } = useContext(GlobalContext);
+
   const [value, setValue] = useState(null);
   const services = [
     {label: 'Elder care', value: 'Elder care'},
@@ -41,7 +47,7 @@ const AppointmentComponent = ({form,errors,onChange}) => {
         <CustomButton
           title="Submit"
           primary
-          onPress={() => console.log(data)}
+          onPress={() => onSubmit(data['user']._id)}
         />
         <CustomButton title="Clear" primary />
       </Container>

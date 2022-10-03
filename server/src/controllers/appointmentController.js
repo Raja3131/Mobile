@@ -23,15 +23,15 @@ export const createAppointment = async (req, res) => {
     time,
   } = req.body;
   try {
-    const existingPatient = await User.isThisPatientInUse(patientName);
-    console.log(existingPatient);
+    // const existingPatient = await User.isThisPatientInUse(patientName);
+    // console.log(existingPatient);
 
-    if (!existingPatient) {
-      return res.json({
-        success: false,
-        message: "Patient Already Appointed",
-      });
-    }
+    // if (!existingPatient) {
+    //   return res.json({
+    //     success: false,
+    //     message: "Patient Already Appointed",
+    //   });
+    // }
     const newAppointment = {
       patientName,
       email,

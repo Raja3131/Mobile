@@ -2,11 +2,53 @@ import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
 
 const userSchema = new mongoose.Schema({
+ 
+
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
+  email: {
+    type: String,
+    required: [true, "Please provide email address"],
+    unique: true,
+    match: [
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "Please provide a valid email",
+    ],
+  },
+  mobile: {
+    type: String,
+    unique:[true,"Mobile number Already Exists"],
+    required:[true,"Please Provide Mobile Number"]
+  },
+  city: {
+    type: String,
+  },
+  password: {
+    type: String,
+  },
+  confirmPassword: {
+    type: String,
+  },
+  newPassword: {
+    type:String,
+  },
+  resetPasswordToken:  {
+    type:String,
+  },
+  resetPasswordExpire:  {
+    type:Date,
+  },
+  
+  tokens: [{ type: Object }],
   appointment: [{
     patientName: {
       type: String,
     },
-    user:{type:mongoose.Types.ObjectId,ref:"User"},
+    // user:{type:mongoose.Types.ObjectId,ref:"User"},
     email: {
       type: String,
       required: [true, "Please provide email address"],
@@ -63,47 +105,6 @@ const userSchema = new mongoose.Schema({
   
     }
   }],
-
-  firstName: {
-    type: String,
-  },
-  lastName: {
-    type: String,
-  },
-  email: {
-    type: String,
-    required: [true, "Please provide email address"],
-    unique: true,
-    match: [
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      "Please provide a valid email",
-    ],
-  },
-  mobile: {
-    type: String,
-    unique:[true,"Mobile number Already Exists"],
-    required:[true,"Please Provide Mobile Number"]
-  },
-  city: {
-    type: String,
-  },
-  password: {
-    type: String,
-  },
-  confirmPassword: {
-    type: String,
-  },
-  newPassword: {
-    type:String,
-  },
-  resetPasswordToken:  {
-    type:String,
-  },
-  resetPasswordExpire:  {
-    type:Date,
-  },
-  
-  tokens: [{ type: Object }],
   
 },
 {
