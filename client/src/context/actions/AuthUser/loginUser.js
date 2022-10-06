@@ -13,9 +13,7 @@ export default ({mobile:mobile, password: password}) =>
         mobile: mobile,
         password: password,
       });
-      console.log(res.data.message)
       if (res.data.status == 200) {
-        console.log(res.data)
       AsyncStorage.setItem('user',JSON.stringify(res.data))
 
         dispatch({
@@ -23,7 +21,6 @@ export default ({mobile:mobile, password: password}) =>
           payload: res.data,
         });
       } else {
-      console.log(res.data)
 
         dispatch({
           type: ACTION_TYPES.LOGIN_FAIL,

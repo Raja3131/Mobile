@@ -101,13 +101,13 @@ const appointments = (state, {type, payload}) => {
             ...state.createAppointment,
             AppointLoading: false,
             AppointError: null,
-            AppointData: payload,
+            AppointData: [payload],
           },
   
           getAppointments: {
             ...state.getAppointments,
             AppointLoading: false,
-            AppointData: {payload, ...state.getAppointments.data},
+            AppointData: [payload, ...state.getAppointments.data],
             AppointError: null,
           },
         };
@@ -138,7 +138,7 @@ const appointments = (state, {type, payload}) => {
           getAppointments: {
             ...state.getAppointments,
             AppointLoading: false,
-            AppointData: [payload],
+            AppointData: payload,
             AppointError: null,
           },
         };

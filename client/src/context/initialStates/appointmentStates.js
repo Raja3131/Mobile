@@ -1,17 +1,17 @@
 export default {
   getAppointments: {
-    AppointData: {},
+    AppointData: [],
     AppointError: null,
     AppointLoading: false,
   },
   createAppointment: {
-    AppointData: {},
+    AppointData: [],
     AppointError: null,
     AppointLoading: false,
   },
 
   deleteAppointment: {
-    AppointData: {},
+    AppointData: [],
     AppointError: null,
     AppointLoading: false,
   },

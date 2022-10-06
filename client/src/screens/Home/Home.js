@@ -15,7 +15,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const Home = () => {
   const {navigate} = useNavigation();
   const [userData,setUserData] = useState([])
-  const [appointments,setAppointments]  = useState([])
   const {
     authDispatch,
     authState: {error, loading, isLoggedIn, data},
@@ -45,8 +44,6 @@ const userName= data['user'].firstName.toUpperCase()
   useFocusEffect(
     useCallback(() => {
       getAppointments(data['user']._id)(appointmentDispatch);
-      setAppointments(AppointData)
-      console.log(appointments)
     }, []),
   );
 
@@ -58,7 +55,7 @@ const userName= data['user'].firstName.toUpperCase()
         </>
       )
     }
-    return appointments.map(appointment => (
+    return AppointData.map(appointment => (
       <>
       <View style={styles.Appointment}>
         <View key={appointment._id} style={styles.itemContainer}>
