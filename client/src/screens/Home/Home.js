@@ -55,7 +55,7 @@ const userName= data['user'].firstName.toUpperCase()
         </>
       )
     }
-    return AppointData.map(appointment => (
+    return AppointData.reverse().map(appointment => (
       <>
       <View style={styles.Appointment}>
         <View key={appointment._id} style={styles.itemContainer}>
