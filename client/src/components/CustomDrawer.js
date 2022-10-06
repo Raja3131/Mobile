@@ -24,6 +24,7 @@ const CustomDrawer = props => {
         authDispatch,
         authState: {error, loading, isLoggedIn, data},
       } = useContext(GlobalContext);
+      const userName = data['user'].firstName.toUpperCase()
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
@@ -43,7 +44,7 @@ const CustomDrawer = props => {
               fontFamily: 'Roboto-Medium',
               marginBottom: 5,
             }}>
-             {data['user'].firstName.toUpperCase()}
+             {userName}
           </Text>
           <View style={{flexDirection: 'row'}}>
             <Text

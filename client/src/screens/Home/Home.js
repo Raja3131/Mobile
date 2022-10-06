@@ -6,14 +6,15 @@ import {TextStyles} from '../../styles/Global';
 import appColors from '../../styles/appColors';
 import Icon from '../../components/common/Icon/Icon';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import DateTimePicker from '../../components/common/DatePicker/DatePicker';
 import getAppointments from '../../context/actions/appointments/getAppointments';
 import logoutUser from '../../context/actions/AuthUser/logoutUser';
 import Message from '../../components/common/Message/Message';
 import Container from '../../components/common/container/Container';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Home = () => {
   const {navigate} = useNavigation();
+  const [userData,setUserData] = useState([])
   const {
     authDispatch,
     authState: {error, loading, isLoggedIn, data},
@@ -21,17 +22,27 @@ export const Home = () => {
   const onLogOut = () => {
     logoutUser()(authDispatch);
   };
-
+const userName= data['user'].firstName.toUpperCase()
   const {
     appointmentDispatch,
     appointmentState: {
       getAppointments: {AppointData, AppointLoading, AppointError},
     },
   } = useContext(GlobalContext);
+  // const getData = async () => {
+  //   try {
+  //     const value = await AsyncStorage.getItem('user')
+  //     if(value !== null) {
+  //       setUserData(value)
+  //       console.log('UserData:',userData)
+  //     }
+  //   } catch(e) {
+  //     console.log(error)
+  //   }
+  // }
 
   useFocusEffect(
     useCallback(() => {
-      console.log(data['user'].firstName);
       getAppointments(data['user']._id)(appointmentDispatch);
     }, []),
   );
@@ -47,7 +58,7 @@ export const Home = () => {
     return AppointData.reverse().map(appointment => (
       <>
       <View style={styles.Appointment}>
-        <View style={styles.itemContainer}>
+        <View key={appointment._id} style={styles.itemContainer}>
 <Text>{appointment.patientName}</Text>
       </View>
       </View>
@@ -58,13 +69,12 @@ export const Home = () => {
     <>
     <Container>
       <View style={styles.homeContainer}>
-        {}
         <View style={styles.Headers}>
           <Text style={[TextStyles.primaryText, {color: 'black'}]}>
             Welcome To Heartly
           </Text>
           <Text style={[TextStyles.secondaryText, {color: 'white'}]}>
-            Hi {data['user'].firstName.toUpperCase()}
+            {userName}
           </Text>
         </View>
         

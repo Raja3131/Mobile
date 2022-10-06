@@ -7,8 +7,8 @@ import styles from './styles';
 import Icon from '../common/Icon/Icon';
 import appColors from '../../styles/appColors';
 import CustomDropDown from '../common/CustomDropDown/CustomDropDown';
-import DateTimePicker from '../common/DateTimePicker/DateTimePicker';
 import { GlobalContext } from '../../context/Provider';
+import DateTimePicker from './../common/DateTimePicker/DateTimePicker';
 const AppointmentComponent = ({form,errors,onChange,onSubmit}) => {
   const {
     authDispatch,
@@ -16,6 +16,15 @@ const AppointmentComponent = ({form,errors,onChange,onSubmit}) => {
   } = useContext(GlobalContext);
 
   const [value, setValue] = useState(null);
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [show, setShow] = useState(false);
+
+  const onDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDate(currentDate);
+    console.log(currentDate)
+  };
   const services = [
     {label: 'Elder care', value: 'Elder care'},
     {label: 'Home Nursing', value: 'Home Nursing'},
@@ -26,6 +35,7 @@ const AppointmentComponent = ({form,errors,onChange,onSubmit}) => {
     {label: 'Pharmacy Lab', value: 'Pharmacy Lab'},
     {label: 'Assistance Services', value: 'Assistance Services'},
   ];
+  
 
   return (
     <>
@@ -41,15 +51,36 @@ const AppointmentComponent = ({form,errors,onChange,onSubmit}) => {
         <CustomDropDown data={services} />
         <Input label="Mobile" onChangeText={(value)=>onChange({name:'mobile',value})} value={form.mobile} error={errors.mobile} maxLength={10} keyboardType="numeric"  />
         <Input label="Email" onChangeText={(value)=>onChange({name:'email',value})}  value={form.email} error={errors.email}/>
-        <DateTimePicker />
-        <CustomDropDown data={additionalServices} />
+        <DateTimePicker onDateChange={onDateChange} show={show} setShow={setShow} date={date} />
+        <CustomDropDown data={additionalServices} value={value} />
 
         <CustomButton
           title="Submit"
           primary
           onPress={() => onSubmit(data['user']._id)}
+          // disabled={
+          //   errors.patientName ||
+          //   errors.address ||
+          //   errors.pincode ||
+          //   !(
+          //     form.mobile &&
+          //     form.location
+          //   )
+          //     ? true
+          //     : false
+          // }
         />
-        <CustomButton title="Clear" primary />
+        <CustomButton title="Clear" primary   disabled={
+            !(
+              form.patientName ||
+              form.address ||
+              form.email ||
+              form.mobile ||
+              form.city ||
+              form.date ||
+              form.time
+            )
+          }/>
       </Container>
     </>
   );
