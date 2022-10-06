@@ -43,7 +43,7 @@ const TextStyles = StyleSheet.create({
     fontWeight: Variables.FONT_WEIGHT_MEDIUM,
   },
   secondaryText: {
-    fontSize: 20,
+    fontSize: 18,
     textAlign: 'center',
     padding: 12,
     fontWeight: Variables.FONT_WEIGHT_MEDIUM,

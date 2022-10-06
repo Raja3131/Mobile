@@ -69,7 +69,7 @@ const Appointment = () => {
       .then(res => {
         console.log(res.data);
         if (res.data.status === 201) {
-          Alert.alert('Register successful');
+          Alert.alert('Appointment successful');
           navigate('Home');
         }
         // else if(res.data.status===400){

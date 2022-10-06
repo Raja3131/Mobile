@@ -58,17 +58,17 @@ const AppointmentComponent = ({form,errors,onChange,onSubmit}) => {
           title="Submit"
           primary
           onPress={() => onSubmit(data['user']._id)}
-          // disabled={
-          //   errors.patientName ||
-          //   errors.address ||
-          //   errors.pincode ||
-          //   !(
-          //     form.mobile &&
-          //     form.location
-          //   )
-          //     ? true
-          //     : false
-          // }
+          disabled={
+            errors.patientName ||
+            errors.address ||
+            errors.pincode ||
+            !(
+              form.mobile &&
+              form.location
+            )
+              ? true
+              : false
+          }
         />
         <CustomButton title="Clear" primary   disabled={
             !(

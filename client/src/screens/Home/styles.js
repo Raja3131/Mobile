@@ -25,7 +25,7 @@ export default StyleSheet.create({
   
   itemContainer:{
     backgroundColor: appColors.white,
-    height: 60,
+    height: 80,
     width: '80%',
     padding:10,
     borderBottomColor:appColors.Black,

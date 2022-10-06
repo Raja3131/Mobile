@@ -59,7 +59,10 @@ const userName= data['user'].firstName.toUpperCase()
       <>
       <View style={styles.Appointment}>
         <View key={appointment._id} style={styles.itemContainer}>
-<Text>{appointment.patientName}</Text>
+<Text style={[TextStyles.secondaryText,{marginTop:-10}]}>{appointment.patientName}</Text>
+<Text>{appointment.email}</Text>
+
+
       </View>
       </View>
       </>
@@ -70,7 +73,7 @@ const userName= data['user'].firstName.toUpperCase()
     <Container>
       <View style={styles.homeContainer}>
         <View style={styles.Headers}>
-          <Text style={[TextStyles.primaryText, {color: 'black'}]}>
+          <Text style={[TextStyles.primaryText, {color: appColors.dimBlack}]}>
             Welcome To Heartly
           </Text>
           <Text style={[TextStyles.secondaryText, {color: 'white'}]}>
