@@ -39,7 +39,7 @@ const appointments = (state, {type, payload}) => {
       case ACTION_TYPES.EDIT_APPOINTMENT_FAIL: {
         return {
           ...state,
-          createContact: {
+          createAppointment: {
             ...state.createAppointment,
             AppointLoading: false,
             AppointError: null,
@@ -61,13 +61,13 @@ const appointments = (state, {type, payload}) => {
       case ACTION_TYPES.DELETE_APPOINTMENT_SUCCESS: {
         return {
           ...state,
-          deleteContact: {
+          deleteAppointment: {
             ...state.deleteAppointment,
             AppointLoading: false,
             AppointError: null,
           },
   
-          getContacts: {
+          getAppointments: {
             ...state.getAppointments,
             AppointLoading: false,
             AppointData: state.getAppointments.data.filter((item) => item.id !== payload),
@@ -79,7 +79,7 @@ const appointments = (state, {type, payload}) => {
       case ACTION_TYPES.CREATE_APPOINTMENT_FAIL:
         return {
           ...state,
-          createContact: {
+          createAppointment: {
             ...state.createAppointment,
             AppointLoading: false,
             AppointError: null,
@@ -88,7 +88,7 @@ const appointments = (state, {type, payload}) => {
       case ACTION_TYPES.CREATE_APPOINTMENT_LOADING:
         return {
           ...state,
-          createContact: {
+          createAppointment: {
             ...state.createAppointment,
             AppointLoading: true,
             AppointError: null,
@@ -97,17 +97,17 @@ const appointments = (state, {type, payload}) => {
       case ACTION_TYPES.CREATE_APPOINTMENT_SUCCESS:
         return {
           ...state,
-          createContact: {
+          createAppointment: {
             ...state.createAppointment,
             AppointLoading: false,
             AppointError: null,
             AppointData: payload,
           },
   
-          getContacts: {
+          getAppointments: {
             ...state.getAppointments,
             AppointLoading: false,
-            AppointData: [payload, ...state.getAppointments.data],
+            AppointData: {payload, ...state.getAppointments.data},
             AppointError: null,
           },
         };
@@ -138,7 +138,7 @@ const appointments = (state, {type, payload}) => {
           getAppointments: {
             ...state.getAppointments,
             AppointLoading: false,
-            AppointData: payload,
+            AppointData: [payload],
             AppointError: null,
           },
         };

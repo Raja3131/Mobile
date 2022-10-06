@@ -4,6 +4,7 @@ import AppointmentComponent from '../../components/AppointmentComponent/Appointm
 import { GlobalContext } from '../../context/Provider';
 import axiosInstance from '../../helpers/axiosInstance';
 import createAppointments from '../../context/actions/appointments/createAppointments';
+import { useNavigation } from '@react-navigation/native';
 
 const Appointment = () => {
   const [errors, setErrors] = useState({});
@@ -14,7 +15,9 @@ const Appointment = () => {
     authDispatch,
     authState: {error, loading, isLoggedIn, data},
   } = useContext(GlobalContext);
+  const {appointmentDispatch,appointmentState:{createAppointment:{AppointLoading}}} = useContext(GlobalContext);
 
+const {navigate} = useNavigation();
 
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
@@ -82,7 +85,8 @@ const Appointment = () => {
     //     Alert.alert(res.data.message);
     //   }
     // });
-    createAppointments(form,id)(authDispatch)
+    createAppointments(form,id)(appointmentDispatch)
+    navigate('Home');
   }
   return (
    <>

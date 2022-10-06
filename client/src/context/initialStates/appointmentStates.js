@@ -1,6 +1,6 @@
 export default {
   getAppointments: {
-    AppointData: [],
+    AppointData: {},
     AppointError: null,
     AppointLoading: false,
   },

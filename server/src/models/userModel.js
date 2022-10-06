@@ -12,17 +12,17 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: [true, "Please provide email address"],
-    unique: true,
-    match: [
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      "Please provide a valid email",
-    ],
+    // required: [true, "Please provide email address"],
+    // unique: true,
+    // match: [
+    //   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    //   "Please provide a valid email",
+    // ],
   },
   mobile: {
     type: String,
-    unique:[true,"Mobile number Already Exists"],
-    required:[true,"Please Provide Mobile Number"]
+    // unique:[true,"Mobile number Already Exists"],
+    // required:[true,"Please Provide Mobile Number"]
   },
   city: {
     type: String,
@@ -51,17 +51,17 @@ const userSchema = new mongoose.Schema({
     // user:{type:mongoose.Types.ObjectId,ref:"User"},
     email: {
       type: String,
-      required: [true, "Please provide email address"],
-      unique: true,
-      match: [
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        "Please provide a valid email",
-      ],
+      // required: [true, "Please provide email address"],
+      // unique: true,
+      // match: [
+      //   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      //   "Please provide a valid email",
+      // ],
     },
     mobile: {
       type: String,
-      unique: [true, "Mobile number Already Exists"],
-      required: [true, "Please Provide Mobile Number"],
+      // unique: [true, "Mobile number Already Exists"],
+      // required: [true, "Please Provide Mobile Number"],
     },
     address: {
       type: String,

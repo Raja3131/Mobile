@@ -137,14 +137,13 @@ const Register = () => {
 
           navigate(ROUTE_NAMES.LOGIN);
         }
-        // else if(res.data.status===400){
-        //   Alert.alert('Both password should be same');
-
-        // } 
+     
         else {
           Alert.alert(res.data.message);
         }
-      });
+      }).catch(error=>{
+        console.log(error);
+      })
   };
 
   return (

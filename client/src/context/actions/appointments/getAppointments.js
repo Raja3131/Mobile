@@ -9,7 +9,7 @@ export default (id) => (dispatch) => {
     axiosInstance
       .get(`appointment/${id}`)
       .then((res) => {
-        // console.log(res.data)
+        console.log(res.data)
         dispatch({
           type: ACTION_TYPES.GET_APPOINTMENTS_SUCCESS,
           payload: res.data,

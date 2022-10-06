@@ -7,7 +7,7 @@ import DrawerNavigator from "./DrawerNavigator";
 
 const AppNavContainer = () => {
     const {authState:{isLoggedIn}} = useContext(GlobalContext)
-    console.log(isLoggedIn)
+    // console.log(isLoggedIn)
   return (
    <>
    <NavigationContainer>
