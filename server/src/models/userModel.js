@@ -1,54 +1,14 @@
 import mongoose from "mongoose";
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
 
-const userSchema = new mongoose.Schema({
- 
-
-  firstName: {
-    type: String,
-  },
-  lastName: {
-    type: String,
-  },
-  email: {
-    type: String,
-    // required: [true, "Please provide email address"],
-    // unique: true,
-    // match: [
-    //   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-    //   "Please provide a valid email",
-    // ],
-  },
-  mobile: {
-    type: String,
-    // unique:[true,"Mobile number Already Exists"],
-    // required:[true,"Please Provide Mobile Number"]
-  },
-  city: {
-    type: String,
-  },
-  password: {
-    type: String,
-  },
-  confirmPassword: {
-    type: String,
-  },
-  newPassword: {
-    type:String,
-  },
-  resetPasswordToken:  {
-    type:String,
-  },
-  resetPasswordExpire:  {
-    type:Date,
-  },
-  
-  tokens: [{ type: Object }],
-  appointment: [{
-    patientName: {
+const userSchema = new mongoose.Schema(
+  {
+    firstName: {
       type: String,
     },
-    // user:{type:mongoose.Types.ObjectId,ref:"User"},
+    lastName: {
+      type: String,
+    },
     email: {
       type: String,
       // required: [true, "Please provide email address"],
@@ -60,56 +20,102 @@ const userSchema = new mongoose.Schema({
     },
     mobile: {
       type: String,
-      // unique: [true, "Mobile number Already Exists"],
-      // required: [true, "Please Provide Mobile Number"],
+      // unique:[true,"Mobile number Already Exists"],
+      // required:[true,"Please Provide Mobile Number"]
     },
-    address: {
+    city: {
       type: String,
     },
-    district: {
+    password: {
       type: String,
     },
-    pincode: {
-      type: Number,
-    },
-    services: {
+    confirmPassword: {
       type: String,
     },
-    additionalServices: {
+    newPassword: {
       type: String,
     },
-    timeToCall: {
+    resetPasswordToken: {
+      type: String,
+    },
+    resetPasswordExpire: {
       type: Date,
     },
-    date: {
-      type: Date,
-    },
-    time: {
-      type: Date,
-    },
-    isConfirmed: {
-      type: Boolean,
-      default: false,
-    },
-    isCancelled: {
-      type: Boolean,
-      default: false
-    },
-    isClosed: {
-      type: Boolean,
-      default: false
-    },
-    isOpen: {
-      type: Boolean,
-      default: false
-  
-    }
-  }],
-  
-},
-{
-  timestamps: true
-}
+
+    tokens: [{ type: Object }],
+    appointment: [
+      {
+        patientName: {
+          type: String,
+        },
+        // user:{type:mongoose.Types.ObjectId,ref:"User"},
+        email: {
+          type: String,
+          // required: [true, "Please provide email address"],
+          // unique: true,
+          // match: [
+          //   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+          //   "Please provide a valid email",
+          // ],
+        },
+        mobile: {
+          type: String,
+          // unique: [true, "Mobile number Already Exists"],
+          // required: [true, "Please Provide Mobile Number"],
+        },
+        address: {
+          type: String,
+        },
+        district: {
+          type: String,
+        },
+        pincode: {
+          type: Number,
+        },
+        services: {
+          type: String,
+        },
+        additionalServices: {
+          type: String,
+        },
+        timeToCall: {
+          type: Date,
+        },
+        date: {
+          type: Date,
+        },
+        time: {
+          type: Date,
+        },
+        isConfirmed: {
+          type: Boolean,
+          default: false,
+        },
+        isCancelled: {
+          type: Boolean,
+          default: false,
+        },
+        isClosed: {
+          type: Boolean,
+          default: false,
+        },
+        isOpen: {
+          type: Boolean,
+          default: false,
+        },
+        createdAt:{type: Date, default: Date.now()},
+
+      },
+      {
+        timestamps: true,
+      },
+      
+      
+    ],
+  },
+  {
+    timestamps: true,
+  }
 );
 // userSchema.pre("save", async function (next) {
 // try {
@@ -121,60 +127,58 @@ const userSchema = new mongoose.Schema({
 // } catch (error) {
 //   console.log(error)
 // }
- 
+
 // });
 // userSchema.methods.comparePassword = async function (password) {
 //   if (!password) throw new Error('Password is mission, can not compare!');
 
 //   try {
 //     const result = await password===this.password
-    
+
 //     return result;
 //   } catch (error) {
 //     console.log('Error while comparing password!', error.message);
 //   }
 // };
 
-
 userSchema.statics.isThisEmailInUse = async function (email) {
-  if (!email) throw new Error('Invalid Email');
+  if (!email) throw new Error("Invalid Email");
   try {
     const user = await this.findOne({ email });
     if (user) return false;
 
     return true;
   } catch (error) {
-    console.log('error inside isThisEmailInUse method', error.message);
+    console.log("error inside isThisEmailInUse method", error.message);
     return false;
   }
 };
 userSchema.statics.isThisMobileInUse = async function (mobile) {
-  if (!mobile) throw new Error('Invalid mobile');
+  if (!mobile) throw new Error("Invalid mobile");
   try {
     const user = await this.findOne({ mobile });
     if (user) return false;
 
     return true;
   } catch (error) {
-    console.log('error inside isThisMobileInUse method', error.message);
+    console.log("error inside isThisMobileInUse method", error.message);
     return false;
   }
 };
 userSchema.statics.isThisPatientInUse = async function (patient) {
-  if (!patient) throw new Error('Invalid mobile');
+  if (!patient) throw new Error("Invalid mobile");
   try {
-    const user = await this.findOne({appointment:  { $elemMatch: { patientName: patient }}})
+    const user = await this.findOne({
+      appointment: { $elemMatch: { patientName: patient } },
+    });
     if (user) return false;
 
     return true;
   } catch (error) {
-    console.log('error inside isThisMobileInUse method', error.message);
+    console.log("error inside isThisMobileInUse method", error.message);
     return false;
   }
 };
-
-
-
 
 userSchema.methods.getResetPasswordToken = function () {
   const resetToken = crypto.randomBytes(20).toString("hex");
@@ -191,5 +195,5 @@ userSchema.methods.getResetPasswordToken = function () {
   return resetToken;
 };
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 export default User;

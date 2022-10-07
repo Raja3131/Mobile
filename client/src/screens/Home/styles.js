@@ -4,6 +4,8 @@ import appColors from '../../styles/appColors';
 export default StyleSheet.create({
   homeContainer: {
     flex: 1,
+    backgroundColor: appColors.white,
+
    
   },
   Headers: {
@@ -11,9 +13,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: appColors.Blue,
-    shadowColor: '#333333',
-    shadowOffset: {width: 10, height: 10},
-    shadowRadius: 2,
+ 
     shadowOpacity: 0.4,
     padding: 20,
     borderRadius: 8,
@@ -25,19 +25,23 @@ export default StyleSheet.create({
   
   itemContainer:{
     backgroundColor: appColors.white,
-    height: 80,
-    width: '80%',
-    padding:10,
-    borderBottomColor:appColors.Black,
-    borderBottomWidth: 1,
-    margin:2
-    
-    
-
+    height: 100,
+    width: '100%',
+    padding:20,
+    borderColor:appColors.Blue,
+    margin:2,
+    shadowColor: appColors.dimBlack,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    shadowOpacity: 0.26,
+    elevation: 18,
+    borderRadius:10,
   },
   Appointment:{
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: appColors.white,
+
   },
   iconContainer: {
     flex: 1,

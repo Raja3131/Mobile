@@ -22,8 +22,22 @@ const Appointment = () => {
       createAppointment: {AppointLoading},
     },
   } = useContext(GlobalContext);
+  const [value, setValue] = useState(null);
+  const [dropdownValue,setDropdownValue] = useState(null);
+
+
 
   const {navigate} = useNavigation();
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [show, setShow] = useState(false);
+
+  const onDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDate(currentDate);
+    console.log(currentDate);
+  };
+  
 
   const onChange = ({name, value}) => {
     setForm({...form, [name]: value});
@@ -65,6 +79,9 @@ const Appointment = () => {
         patientName: form.patientName,
         mobile: form.mobile,
         email: form.email,
+        date: date,
+        services:dropdownValue
+        
       })
       .then(res => {
         console.log(res.data);
@@ -89,6 +106,13 @@ const Appointment = () => {
         errors={errors}
         form={form}
         onSubmit={onSubmit}
+        onDateChange={onDateChange}
+        show={show}
+        setShow={setShow}
+        date={date}
+        dropdownValue={dropdownValue}
+        setDropdownValue={setDropdownValue}
+       
       />
     </>
   );

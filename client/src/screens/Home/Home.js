@@ -11,10 +11,11 @@ import logoutUser from '../../context/actions/AuthUser/logoutUser';
 import Message from '../../components/common/Message/Message';
 import Container from '../../components/common/container/Container';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import dayjs from 'dayjs';
+import { ScrollView } from 'react-native-gesture-handler';
 export const Home = () => {
   const {navigate} = useNavigation();
-  const [userData,setUserData] = useState([])
+  const [userData, setUserData] = useState([]);
   const {
     authDispatch,
     authState: {error, loading, isLoggedIn, data},
@@ -22,7 +23,8 @@ export const Home = () => {
   const onLogOut = () => {
     logoutUser()(authDispatch);
   };
-const userName= data['user'].firstName.toUpperCase()
+  const userName = data['user'].firstName.toUpperCase();
+
   const {
     appointmentDispatch,
     appointmentState: {
@@ -44,58 +46,64 @@ const userName= data['user'].firstName.toUpperCase()
   useFocusEffect(
     useCallback(() => {
       getAppointments(data['user']._id)(appointmentDispatch);
+      console.log(AppointData);
     }, []),
   );
 
-  const renderAppointments = ()=>{
-    if(AppointData.length===0){
-      return(
+  const renderAppointments = () => {
+    if (AppointData.length === 0) {
+      return (
         <>
-        <Message message="No Appointments" primary />
+          <Message message="No Appointments" primary />
+
         </>
-      )
+      );
     }
     return AppointData.reverse().map(appointment => (
       <>
-      <View style={styles.Appointment}>
-        <View key={appointment._id} style={styles.itemContainer}>
-<Text style={[TextStyles.secondaryText,{marginTop:-10}]}>{appointment.patientName}</Text>
-<Text>{appointment.email}</Text>
+        <View  style={styles.Appointment}>
+          <View style={styles.itemContainer}>
+            <Text key={appointment._id} style={[TextStyles.secondaryText, {marginTop: -10}]}>
+              {appointment.patientName}
+            </Text>
+            <Text>{dayjs(appointment.date).format("D-MMMM-YYYY")}</Text>
+            <Text>{appointment.services}</Text>
 
-
-      </View>
-      </View>
+          </View>
+        </View>
       </>
     ));
-  }
+  };
   return (
     <>
-    <Container>
-      <View style={styles.homeContainer}>
-        <View style={styles.Headers}>
-          <Text style={[TextStyles.primaryText, {color: appColors.dimBlack}]}>
-            Welcome To Heartly
-          </Text>
-          <Text style={[TextStyles.secondaryText, {color: 'white'}]}>
-            {userName}
-          </Text>
+      <Container>
+        <ScrollView>
+        <View style={styles.homeContainer}>
+          <View style={styles.Headers}>
+            <Text style={[TextStyles.primaryText, {color: appColors.dimBlack}]}>
+              Welcome To Heartly
+            </Text>
+            <Text style={[TextStyles.secondaryText, {color: 'white'}]}>
+              {userName}
+            </Text>
+          </View>
+
+          {renderAppointments()}
+
+          <View style={styles.iconContainer}>
+            <Pressable
+              style={styles.plusIconButton}
+              onPress={() => navigate('Appointment')}>
+              <Icon
+                size={40}
+                name="plus-circle"
+                type="feather"
+                color={appColors.Blue}
+              />
+            </Pressable>
+          </View>
         </View>
-        
-      {renderAppointments()}
-      
-        <View style={styles.iconContainer}>
-          <Pressable
-            style={styles.plusIconButton}
-            onPress={() => navigate('Appointment')}>
-            <Icon
-              size={40}
-              name="plus-circle"
-              type="feather"
-              color={appColors.Blue}
-            />
-          </Pressable>
-        </View>
-      </View>
+        </ScrollView>
       </Container>
     </>
   );
