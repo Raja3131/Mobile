@@ -65,11 +65,11 @@ export const Home = () => {
       <>
         <View  style={styles.Appointment}>
           <View style={styles.itemContainer}>
-            <Text key={appointment._id} style={[TextStyles.secondaryText, {marginTop: -10}]}>
+            <CustomText key={appointment._id} style={[TextStyles.secondaryText, {marginTop: -10}]}>
               {appointment.patientName.charAt(0).toUpperCase() + appointment.patientName.slice(1)}
-            </Text>
-            <Text>{dayjs(appointment.date).format("D-MMMM-YYYY")}</Text>
-            <Text>{dayjs(appointment.date).format("h:mm A")}</Text>
+            </CustomText>
+            <CustomText>{dayjs(appointment.date).format("D-MMMM-YYYY")}</CustomText>
+            <CustomText>{dayjs(appointment.date).format("h:mm A")}</CustomText>
 
             <CustomText>{appointment.services}</CustomText>
             <View style={styles.buttonContainer}>

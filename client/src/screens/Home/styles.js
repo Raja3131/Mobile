@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import appColors from '../../styles/appColors';
 
 export default StyleSheet.create({
@@ -6,15 +6,15 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: appColors.white,
 
-   
+
   },
   Headers: {
-    flex:1,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: appColors.Blue,
- 
-    
+
+
     padding: 20,
     borderRadius: 8,
     margin: 5,
@@ -22,20 +22,19 @@ export default StyleSheet.create({
     textShadowRadius: 10,
     elevation: 10,
   },
-  
-  itemContainer:{
+
+  itemContainer: {
     backgroundColor: appColors.white,
     width: '100%',
-    padding:10,
-    borderColor:appColors.Blue,
-    margin:5,
+    padding: 10,
+    borderColor: appColors.Blue,
+    margin: 5,
     shadowColor: appColors.dimBlack,
-    borderWidth: 1,
-  
-    borderRadius:10,
-    elevation:10
+
+    borderRadius: 10,
+    elevation: 10
   },
-  Appointment:{
+  Appointment: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: appColors.white,
@@ -46,7 +45,7 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
     flexDirection: "row",
   },
-  plusIconButton:{
+  plusIconButton: {
     marginRight: 20,
   },
   buttonContainer: {

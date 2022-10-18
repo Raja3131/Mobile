@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import appColors from '../../../styles/appColors'
 
 const CustomText = ({children}) => {
   return (
@@ -16,5 +17,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-SemiBold',
         fontSize: 16,
         fontWeight: '300',
+        color:appColors.simpleBlue
     }
 })
