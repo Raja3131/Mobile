@@ -35,7 +35,7 @@ const Appointment = () => {
     const currentDate = selectedDate;
     setShow(false);
     setDate(currentDate);
-    console.log(currentDate);
+    console.log(date);
   };
   
 
@@ -80,7 +80,8 @@ const Appointment = () => {
         mobile: form.mobile,
         email: form.email,
         date: date,
-        services:dropdownValue
+        services:dropdownValue,
+        address:form.address
         
       })
       .then(res => {

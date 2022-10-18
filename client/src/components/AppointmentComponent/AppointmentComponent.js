@@ -53,7 +53,12 @@ const AppointmentComponent = ({form,errors,onChange,onSubmit,onDateChange,show,s
         {/* <CustomDropDown data={services} /> */}
         <Input label="Mobile" onChangeText={(value)=>onChange({name:'mobile',value})} value={form.mobile} error={errors.mobile} maxLength={10} keyboardType="numeric"  />
         <Input label="Email" onChangeText={(value)=>onChange({name:'email',value})}  value={form.email} error={errors.email}/>
-        <DateTimePicker onDateChange={onDateChange} show={show} setShow={setShow} date={date} />
+        <DateTimePicker onDateChange={onDateChange} show={show} setShow={setShow} date={date} 
+         minimumDate={new Date().setDate(new Date().getDate())}
+         maximumDate={new Date().setDate(new Date().getDate() + 1)}
+         maximumDateTime={new Date().setDate(new Date().getDate() + 1)}
+         maximumDateTimeTime={new Date().setDate(new Date().getDate() + 1)}
+        />
         {/* <CustomDropDown data={additionalServices} /> */}
         <Dropdown
           style={styles.dropdown}
@@ -92,9 +97,13 @@ const AppointmentComponent = ({form,errors,onChange,onSubmit,onDateChange,show,s
             errors.patientName ||
             errors.address ||
             errors.pincode ||
+            errors.mobile ||
+            errors.email ||
             !(
               form.mobile &&
-              form.location
+              form.location &&
+              form.email &&
+              dropdownValue
             )
               ? true
               : false

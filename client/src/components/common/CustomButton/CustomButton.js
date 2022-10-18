@@ -18,6 +18,7 @@ const CustomButton = ({
   onPress,
   style,
   picker,
+  danger,
   ...props
 }) => {
   const getBgColor = () => {
@@ -26,6 +27,9 @@ const CustomButton = ({
     }
     if(picker){
       return appColors.grey;
+    }
+    if(danger){
+      return appColors.lossRed;
     }
   };
   return (
@@ -47,6 +51,7 @@ const CustomButton = ({
                 style={{
                   opacity: 0.5,
                   color: appColors.grey,
+                  fontFamily:'Poppins-SemiBold'
                 }}>
                 {loading ? 'Please wait...' : title}
               </Text>
@@ -57,6 +62,7 @@ const CustomButton = ({
                   color: appColors.white,
                   fontSize: 16,
                   fontWeight: '400',
+                  fontFamily:'Poppins-SemiBold'
                 }}>
                 {loading ? 'Please wait...' : title}
               </Text>

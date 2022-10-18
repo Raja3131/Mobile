@@ -11,7 +11,7 @@ const Input = ({label,onChangeText,value,error,icon,iconPosition,enteringText,..
         return appColors.Blue
       }
       else {
-        return appColors.grey
+        return appColors.paleBlue
       }
     }
     const getFlexDirection = () => {

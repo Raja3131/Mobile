@@ -13,6 +13,8 @@ import Container from '../../components/common/container/Container';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import dayjs from 'dayjs';
 import { ScrollView } from 'react-native-gesture-handler';
+import CustomButton from '../../components/common/CustomButton/CustomButton';
+import CustomText from '../../components/common/CustomText/CustomText';
 export const Home = () => {
   const {navigate} = useNavigation();
   const [userData, setUserData] = useState([]);
@@ -64,10 +66,17 @@ export const Home = () => {
         <View  style={styles.Appointment}>
           <View style={styles.itemContainer}>
             <Text key={appointment._id} style={[TextStyles.secondaryText, {marginTop: -10}]}>
-              {appointment.patientName}
+              {appointment.patientName.charAt(0).toUpperCase() + appointment.patientName.slice(1)}
             </Text>
             <Text>{dayjs(appointment.date).format("D-MMMM-YYYY")}</Text>
-            <Text>{appointment.services}</Text>
+            <Text>{dayjs(appointment.date).format("h:mm A")}</Text>
+
+            <CustomText>{appointment.services}</CustomText>
+            <View style={styles.buttonContainer}>
+          <CustomButton title="Edit" picker style={{height:20,width:10}}/>
+          <CustomButton title="Cancel" danger style={{height:20,width:10}}/>
+
+            </View>
 
           </View>
         </View>

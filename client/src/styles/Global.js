@@ -47,9 +47,15 @@ const TextStyles = StyleSheet.create({
     textAlign: 'center',
     padding: 12,
     fontWeight: Variables.FONT_WEIGHT_MEDIUM,
+    fontFamily: 'Poppins-SemiBold'
   },
   buttonText: {
     fontSize: 20,
+    textAlign: 'center',
+    color: appColors.white,
+  },
+  infoText: {
+    fontSize: 16,
     textAlign: 'center',
     color: appColors.white,
   },

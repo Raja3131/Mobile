@@ -4,7 +4,7 @@ import RNDateTimePicker from '@react-native-community/datetimepicker';
 import CustomButton from '../CustomButton/CustomButton';
 
 
-const DateTimePicker = ({onDateChange,show,setShow,date}) => {
+const DateTimePicker = ({onDateChange,show,setShow,date,...props}) => {
     // const [date, setDate] = useState(new Date(1598051730000));
   const [mode, setMode] = useState('date');
   // const [show, setShow] = useState(false);
@@ -45,6 +45,7 @@ const DateTimePicker = ({onDateChange,show,setShow,date}) => {
           mode={mode}
           is24Hour={true}
           onChange={onDateChange}
+          {...props}
           
         />
       )}

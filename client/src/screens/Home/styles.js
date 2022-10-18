@@ -14,7 +14,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: appColors.Blue,
  
-    shadowOpacity: 0.4,
+    
     padding: 20,
     borderRadius: 8,
     margin: 5,
@@ -25,17 +25,15 @@ export default StyleSheet.create({
   
   itemContainer:{
     backgroundColor: appColors.white,
-    height: 100,
     width: '100%',
-    padding:20,
+    padding:10,
     borderColor:appColors.Blue,
-    margin:2,
+    margin:5,
     shadowColor: appColors.dimBlack,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    shadowOpacity: 0.26,
-    elevation: 18,
+    borderWidth: 1,
+  
     borderRadius:10,
+    elevation:10
   },
   Appointment:{
     justifyContent: 'center',
@@ -50,5 +48,9 @@ export default StyleSheet.create({
   },
   plusIconButton:{
     marginRight: 20,
-  }
+  },
+  buttonContainer: {
+    flexDirection: "row",
+
+  },
 });

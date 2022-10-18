@@ -9,6 +9,17 @@ import Appointment from '../screens/Appointment/Appointment';
 
 
 const HomeNavigator = () => {
+  const config = {
+    animation: 'spring',
+    config: {
+      stiffness: 1000,
+      damping: 500,
+      mass: 3,
+      overshootClamping: true,
+      restDisplacementThreshold: 0.01,
+      restSpeedThreshold: 0.01,
+    },
+  };
     const Stack = createNativeStackNavigator();
     return (
       <Stack.Navigator>
@@ -40,7 +51,11 @@ const HomeNavigator = () => {
             title: route.params?.title,
             headerBackVisible:true,
             header: () => null,
-            headerShown: false
+            headerShown: false,
+            transitionSpec: {
+              open: config,
+              close: config,
+            },
           })}
           screenOptions={{
             headerShown: false,

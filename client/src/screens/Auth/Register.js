@@ -133,7 +133,7 @@ const Register = () => {
       .then(res => {
         console.log(res.data);
         if (res.data.status === 201) {
-          Alert.alert('Register successful');
+          Alert.alert('Registration successful');
 
           navigate(ROUTE_NAMES.LOGIN);
         }

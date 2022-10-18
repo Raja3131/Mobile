@@ -18,4 +18,9 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
       },
+      profileImage: {
+        height:80,
+        width:80,
+        resizeMode: 'cover'
+      },
 });

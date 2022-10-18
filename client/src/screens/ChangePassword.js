@@ -22,7 +22,7 @@ const ChangePassword = () => {
     setForm({...form, [name]: value});
     if (value !== '') {
       if (name === 'password') {
-        if (value !== data['user'].password) {
+        if (value == data['user'].password) {
           setErrors(prev => {
             return {...prev, [name]: 'Incorrect Password'};
           });
